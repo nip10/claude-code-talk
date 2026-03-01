@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-claude-terracotta: #D97757;
+  --color-claude-terracotta-dark: #C46849;
+  --color-claude-bg-dark: #1B1B1F;
+  --color-claude-bg-darker: #191919;
+  --color-claude-bg-light: #F5F0EB;
+  --color-claude-text-light: #F5F0EB;
+  --color-claude-text-dark: #1B1B1F;
+  --color-claude-muted: #8B8B8B;
+  --color-claude-border-dark: #2D2D2D;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--color-claude-bg-dark);
+  color: var(--color-claude-text-light);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Code blocks (rehype-pretty-code) */
+[data-rehype-pretty-code-figure] pre {
+  background: var(--color-claude-bg-darker) !important;
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+[data-rehype-pretty-code-figure] code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 0.25rem;
+}
+
+/* Inline code */
+:not(pre) > code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  background: var(--color-claude-bg-darker);
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.375rem;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.9em;
+}
+
+/* Print styles */
+@media print {
+  html,
+  body {
+    overflow: visible;
+  }
+
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  .slide-wrapper {
+    break-after: page;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide-counter,
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,19 @@
+<TipSlide
+  title="Custom Tools via MCP"
+  description="Connect Claude Code to external services using the Model Context Protocol (MCP) for custom tool integrations."
+  tags={["MCP", "Extensibility"]}
+>
+
+```json
+// .claude/settings.json
+{
+  "mcpServers": {
+    "my-tool": {
+      "command": "npx",
+      "args": ["my-mcp-server"]
+    }
+  }
+}
+```
+
+</TipSlide>
