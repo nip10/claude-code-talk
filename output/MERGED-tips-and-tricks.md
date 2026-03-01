@@ -28,26 +28,12 @@
 
 ## 1. CLAUDE.md Configuration
 
-### Run `/init` to Bootstrap a CLAUDE.md
-- **What:** Run the `/init` slash command in a new project to have Claude analyze the codebase and auto-generate a `CLAUDE.md` file.
-- **Why it matters:** Saves time on manual setup and gives Claude an accurate starting understanding of the project architecture, tech stack, and conventions.
-- **How:** Open Claude Code in the project root and type `/init`. Review and accept the result.
-- **Sources:** Meta Staff Engineer, Every Level, Why Most Developers
-- **Tags:** `[Config]`, `[Workflow]`, `[Shortcut]`
-
 ### Keep CLAUDE.md Concise — Around 300 Lines / 2.5k Tokens
 - **What:** Keep your CLAUDE.md rule file small and focused. Boris Cherny (Claude Code's creator) keeps his at ~2,500 tokens.
 - **Why it matters:** Every line is loaded into the context window at every session start. Bloated rule files increase token costs and dilute Claude's ability to follow the most important instructions.
-- **How:** Regularly audit your CLAUDE.md and remove outdated or redundant rules. Reference external files for detailed docs rather than inlining them. Apply the 60-second / 30-instruction sanity check: can it be read in 60 seconds? Are there 20–30 instructions or fewer?
+- **How:** Regularly audit your CLAUDE.md and remove outdated or redundant rules. Reference external files for detailed docs rather than inlining them. Prefer manual curation over `/init` bootstrapping, which often generates overly large files.
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, Why Most Developers
 - **Tags:** `[Config]`, `[Performance]`
-
-### Structure CLAUDE.md Top-to-Bottom by Priority
-- **What:** Place the most important rules and instructions at the top.
-- **Why it matters:** Claude reads the file top-to-bottom and gives higher priority to earlier instructions. Burying critical rules at the bottom may cause them to be underweighted.
-- **How:** Order sections as: most critical constraints first (e.g., "never do X"), then architecture and domain context, then build/validation commands, then lower-priority style preferences.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Config]`, `[Prompt Technique]`
 
 ### Use CLAUDE.md Only for Always-On, Non-Negotiable Standards
 - **What:** CLAUDE.md should contain only rules and standards that apply to every task and every conversation. Move task-specific content to skills.
@@ -62,13 +48,6 @@
 - **How:** Add: project description, tech stack, key directories/file paths, architecture overview, and code snippets as examples where applicable.
 - **Sources:** Meta Staff Engineer, Every Level
 - **Tags:** `[Config]`
-
-### Include Build and Validation Commands
-- **What:** Document the build and test commands so Claude can self-validate its changes.
-- **Why it matters:** A validation loop lets Claude iteratively run the build, see failures, and fix them without manual intervention.
-- **How:** Add a `## Build & Validation` section with exact commands: e.g., `npm run build && npm test`.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Config]`, `[Workflow]`, `[Performance]`
 
 ### Treat CLAUDE.md as a Living, Evolving Lint File
 - **What:** When Claude makes a mistake, fix it once and update CLAUDE.md to prevent recurrence — like updating a lint config.
@@ -91,44 +70,9 @@
 - **Sources:** Meta Staff Engineer, Why Most Developers
 - **Tags:** `[Config]`, `[Advanced]`
 
-### Use Separate CLAUDE.md Files Per Microservice or Layer
-- **What:** For full-stack apps, give each microservice, the frontend, and the backend their own CLAUDE.md.
-- **Why it matters:** Each layer has different conventions and constraints. Separate files keep context focused.
-- **How:** Place a `CLAUDE.md` in the root of each service directory. Claude picks up the file closest to its working context.
-- **Sources:** Claude Code Founder
-- **Tags:** `[Config]`, `[Advanced]`
-
-### Commit CLAUDE.md to Version Control
-- **What:** Check your project-level CLAUDE.md into Git so all teammates benefit.
-- **Why it matters:** Encodes team-level AI coding standards into the repo. Changes are tracked and auditable.
-- **How:** Remove personal file paths before committing. Set a high bar — only commit rules that have proven useful. Gather feedback after landing it.
-- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
-- **Tags:** `[Config]`, `[Workflow]`
-
-### Use Trigger Keywords for Natural-Language Shortcuts
-- **What:** Define trigger keywords in CLAUDE.md that map to specific workflows (e.g., "build the app" triggers an Xcode MCP build).
-- **Why it matters:** Creates natural-language shorthand for complex, multi-step workflows.
-- **How:** Document keywords and their behaviors: "When I say 'build the app', use the Xcode MCP to compile and report errors."
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Config]`, `[Prompt Technique]`
-
-### Restart the Session After Updating CLAUDE.md
-- **What:** Run `/clear` after editing CLAUDE.md to reload the updated rules.
-- **Why it matters:** Changes are not picked up mid-session.
-- **How:** Type `/clear` after saving CLAUDE.md changes.
-- **Sources:** Every Level
-- **Tags:** `[Config]`, `[Shortcut]`
-
 ---
 
 ## 2. Plan Mode
-
-### Use Shift+Tab to Toggle Plan Mode
-- **What:** Press Shift+Tab to cycle between Plan Mode (read-only, no edits) and Accept Edits Mode.
-- **Why it matters:** Plan Mode prevents Claude from touching files prematurely. It forces a research-first approach.
-- **How:** Press `Shift+Tab` to toggle. Start new features in Plan Mode.
-- **Sources:** Meta Staff Engineer, Every Level, Top 6 Tips
-- **Tags:** `[Shortcut]`, `[Workflow]`
 
 ### Always Start New Features in Plan Mode
 - **What:** Begin every new feature or non-trivial task in Plan Mode rather than immediately letting Claude make edits.
@@ -224,24 +168,11 @@
 - **Sources:** Skills Beginner to Pro
 - **Tags:** `[Workflow]`
 
-### Hardcode Static Values to Avoid Repeated API Calls
-- **What:** If a skill repeatedly fetches data that never changes (e.g., list IDs), hardcode those values directly.
-- **Why it matters:** Dynamic lookups consume tokens and time on every invocation.
-- **How:** Observe the skill calling an API for a static value. Copy it. Add it directly to skill instructions.
-- **Sources:** Skills Beginner to Pro
-- **Tags:** `[Performance]`, `[Advanced]`
-
 ### Project-Level vs. Global Skills
 - **What:** Skills in `.claude/skills/` are project-scoped. Skills in `~/.claude/skills/` are available globally.
 - **Why it matters:** Some skills (e.g., company tone-of-voice, code review) are useful across all projects.
 - **How:** Place global skills in `~/.claude/skills/<skill-name>/skill.md`.
 - **Sources:** Skills Beginner to Pro, Why Most Developers
-- **Tags:** `[Config]`, `[Workflow]`
-
-### Reference Skills from CLAUDE.md to Guarantee Their Use
-- **What:** Add explicit references in CLAUDE.md (e.g., "every time you write content, use the humanizer skill") to ensure a skill is never skipped.
-- **Why it matters:** Provides a hard guarantee when description-based matching might be ambiguous.
-- **Sources:** Every Level
 - **Tags:** `[Config]`, `[Workflow]`
 
 ### Use Open-Source Skill Collections as a Starting Point
@@ -262,11 +193,6 @@
 - **Why it matters:** Prevents common omissions that cause skill failures.
 - **Sources:** Skills Beginner to Pro
 - **Tags:** `[Workflow]`, `[Prompt Technique]`
-
-### Debugging Skills: Match Symptoms to Fixes
-- **What:** Wrong steps → edit instructions; missing tone/style → add reference files; recurring mistake → add a rule; repeated tool searches → create a reference doc; not triggering → fix YAML description; triggering too often → disable model invocation.
-- **Sources:** Skills Beginner to Pro
-- **Tags:** `[Gotcha]`, `[Workflow]`
 
 ---
 
@@ -448,36 +374,20 @@
 ### Slash Commands Reference
 | Command | Purpose |
 |---|---|
-| `/init` | Bootstrap a CLAUDE.md for the project |
 | `/clear` | Reset context between unrelated tasks |
 | `/context` | Audit what Claude currently has loaded (files, MCPs, token counts) |
 | `/compact` | Manually trigger context compaction |
 | `/memory` | View which memory/rules files are loaded |
-| `/models` | Switch the active model (Opus, Sonnet, Haiku) |
 | `/resume` | Recover a killed/closed Claude instance's context |
 | `/mcp` | Inspect installed MCPs or add new ones |
-| `/help` | Full list of shortcuts and commands |
 | `/chrome` | Open browser panel for web navigation |
 | `/permissions` | Configure command-level permission rules |
 
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
 
-### Use `/help` to Discover Everything
-- **What:** Run `/help` to get a full list of keyboard shortcuts and slash commands.
-- **Why it matters:** Many shortcuts and commands are not obvious and easy to miss.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Shortcut]`
-
 ---
 
 ## 8. Context Management
-
-### Fresh, Condensed Context Beats Bloated Context
-- **What:** Prioritize keeping the context window small and relevant.
-- **Why it matters:** A bloated context causes confusion about what parts of prior attempts were correct. Fresh, focused context produces more reliable outputs.
-- **How:** Start new tasks with `/clear`. Use Plan Mode to align upfront. Avoid excessive trial-and-error cycles.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Workflow]`, `[Performance]`
 
 ### Use `/clear` Between Unrelated Tasks
 - **What:** Wipe the current context window when switching to a completely different task.
@@ -579,13 +489,6 @@
 - **Sources:** Claude Code Founder
 - **Tags:** `[Workflow]`, `[Config]`
 
-### Enable TypeScript Strict Mode for AI-Assisted Projects
-- **What:** Set `"strict": true` in `tsconfig.json`. AI agents have no built-in way to catch runtime errors — strict mode moves this to the compiler.
-- **Why it matters:** Catches bugs at build time. Gives the agent reliable error logs to fix against.
-- **How:** In `tsconfig.json`, add `"strict": true`. For Python, use `pylint` / `mypy`.
-- **Sources:** Claude's Best Release
-- **Tags:** `[Config]`, `[Workflow]`
-
 ---
 
 ## 10. Browser Automation
@@ -604,16 +507,10 @@
 - **Tags:** `[Workflow]`, `[Front-End]`
 
 ### Prioritize Agent Browser Over MCP-Based Testing in CLAUDE.md
-- **What:** Add an instruction to prefer Agent Browser, falling back to Puppeteer MCP only if unavailable.
+- **What:** Add an instruction to prefer Agent Browser for browser-based verification.
 - **Why it matters:** The Chrome Extension loads the full DOM and exhausts context quickly. Agent Browser is far more efficient.
 - **Sources:** Claude's Best Release
 - **Tags:** `[Config]`, `[Performance]`, `[Front-End]`
-
-### Use Puppeteer MCP for Isolated Browser Sessions
-- **What:** Puppeteer MCP runs in an isolated browser separate from your current sessions.
-- **Why it matters:** Privacy advantage over the Chrome Extension (no existing user sessions exposed).
-- **Sources:** Claude's Best Release
-- **Tags:** `[Advanced]`, `[Front-End]`
 
 ### Use `/chrome` for Browser Navigation
 - **What:** The `/chrome` command opens a browser panel Claude can control — navigating, clicking, typing, reading page contents.
@@ -621,12 +518,6 @@
 - **How:** Type `/chrome`, then instruct Claude naturally: "Go to the staging site and check the login flow."
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Advanced]`, `[Front-End]`, `[Workflow]`
-
-### Playwright MCP — Use Sparingly
-- **What:** Playwright MCP gives Claude browser interaction for UI-level verification, but is very token-heavy.
-- **Why it matters:** Use selectively for specific verification tasks. Indiscriminate use drains tokens quickly.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Advanced]`, `[Performance]`, `[Front-End]`
 
 ### Drag and Drop Screenshots into Claude Code
 - **What:** Take a screenshot and drag it directly into the Claude Code input.
@@ -652,12 +543,6 @@
 - **Sources:** Claude Code Worktrees
 - **Tags:** `[Config]`
 
-### Use `--tmux` Flag to Auto-Navigate to Worktree Directory
-- **What:** Pass `--tmux` when creating/opening a worktree to auto-change the terminal directory.
-- **Why it matters:** Without it, your shell stays in the original project root.
-- **Sources:** Claude Code Worktrees
-- **Tags:** `[Workflow]`, `[Shortcut]`
-
 ### Enable Automatic Worktree Isolation in Sub-Agent Front Matter
 - **What:** Add `isolation: worktree` to a custom sub-agent definition to auto-create a dedicated worktree on invocation.
 - **Why it matters:** Removes manual worktree management for custom sub-agent workflows.
@@ -669,13 +554,6 @@
 - **Why it matters:** Eliminates idle waiting time. Multiply throughput by context-switching between instances. Boris Cherny runs 5 local + 5–10 on claude.ai/code.
 - **How:** Open multiple iTerm2 panes (Command+D to split, Command+[ and ] to navigate). Number tabs. Enable sound notifications when Claude finishes.
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
-- **Tags:** `[Workflow]`, `[Advanced]`
-
-### Use Git Worktrees (Not Branches) for Parallel Agent Isolation
-- **What:** Branches share the same working directory and cause conflicts. Worktrees are fully isolated.
-- **Why it matters:** Multiple agents can work simultaneously without interference. Output merges cleanly.
-- **How:** `git worktree add ../feature-a feature-a` or use `claude -W`.
-- **Sources:** Claude's Best Release, Meta Staff Engineer, Claude Code Worktrees
 - **Tags:** `[Workflow]`, `[Advanced]`
 
 ### Git as a Safety Net — Prefer Over Claude's Rewind
@@ -697,11 +575,6 @@
 - **Why it matters:** Bridge between async cloud work and local interactive work without losing session state.
 - **Sources:** Claude Code Founder
 - **Tags:** `[Workflow]`, `[Advanced]`
-
-### Prerequisite: Git Must Have at Least One Commit
-- **What:** Native worktree support requires `git init` and at least one commit before using `-W`.
-- **Sources:** Claude Code Worktrees
-- **Tags:** `[Gotcha]`, `[Config]`
 
 ---
 
@@ -733,12 +606,6 @@
 - **How:** Generate user stories first. After implementation, have Claude work through them one by one.
 - **Sources:** Claude's Best Release
 - **Tags:** `[Workflow]`, `[Prompt Technique]`, `[Advanced]`
-
-### Use AI Parsing Instead of Regex for Unstructured Content
-- **What:** When extracting data from unstructured HTML or similar, use a lightweight model (Haiku) instead of regex.
-- **Why it matters:** Regex breaks on format variations. AI extraction is more robust.
-- **Sources:** Superpowers Review
-- **Tags:** `[Workflow]`, `[Prompt Technique]`
 
 ---
 
@@ -800,23 +667,6 @@
 - **Why it matters:** Prevents loss of accumulated context from a long session.
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`, `[Shortcut]`
-
-### Use `/models` to Switch Models for Better Results
-- **What:** Prefer Claude Opus for complex tasks; use Sonnet/Haiku for cost-sensitive work.
-- **Why it matters:** Opus produces higher-quality reasoning. Boris Cherny uses Opus 4.5 with thinking enabled for all tasks — the lower error rate means less time steering.
-- **Sources:** Meta Staff Engineer, Claude Code Founder
-- **Tags:** `[Config]`, `[Performance]`
-
-### Use the Claude Code Max Plan for Heavy Usage
-- **What:** The Max Plan provides 20x token usage compared to lower plans.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Performance]`, `[Config]`
-
-### Use the Claude Code GitHub Action for PR-Based Corrections
-- **What:** Install the GitHub Action bot. During PR reviews, ask Claude to add mistakes to CLAUDE.md directly from the PR.
-- **Why it matters:** Closes the loop between code review feedback and future Claude behavior.
-- **Sources:** Claude Code Founder
-- **Tags:** `[Workflow]`, `[Config]`, `[Advanced]`
 
 ### Use Claude Code as a General-Purpose Orchestrator
 - **What:** Claude Code can drive Slack, BigQuery, Sentry, Notion, and other non-coding tools via MCP and CLIs.
@@ -881,18 +731,10 @@
 ## 15. Voice Input
 
 ### Use Voice Input for Hands-Free Prompting
-- **What:** Use speech-to-text (Whisper, OpenWhispr, or similar) to dictate prompts instead of typing.
+- **What:** Use speech-to-text tools to dictate prompts instead of typing.
 - **Why it matters:** Faster than typing when juggling multiple Claude instances. Allows more fluid multitasking.
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`
-
-### OpenWhispr — Free, Open-Source Alternative to SuperWhisper
-- **What:** Free voice dictation tool that uses AI (OpenAI or Anthropic API) to produce clean, punctuated transcriptions. Removes hesitations and filler words automatically.
-- **Key features:** Keyboard shortcut activation, AI agent mode (speak a prompt → get AI response pasted), custom system prompts for recurring dictation needs, local model support available.
-- **How:** Download OpenWhispr, configure with your API key. Use Anthropic's Claude model for faster post-processing.
-- **Caveats:** Non-QWERTY keyboard layouts may require manual shortcut key mapping.
-- **Sources:** OpenWhispr
-- **Tags:** `[Workflow]`, `[Config]`
 
 ---
 
