@@ -1,28 +1,52 @@
 import Deck from "@/components/Deck";
-import Slide01 from "@/content/slides/01-title.mdx";
-import Slide02 from "@/content/slides/02-section-getting-started.mdx";
-import Slide03 from "@/content/slides/03-tip-claude-md.mdx";
-import Slide04 from "@/content/slides/04-tip-slash-commands.mdx";
-import Slide05 from "@/content/slides/05-section-workflow.mdx";
-import Slide06 from "@/content/slides/06-tip-subagents.mdx";
-import Slide07 from "@/content/slides/07-tip-keyboard-shortcuts.mdx";
-import Slide08 from "@/content/slides/08-section-advanced.mdx";
-import Slide09 from "@/content/slides/09-tip-custom-tools.mdx";
-import Slide10 from "@/content/slides/10-closing.mdx";
+import TitleSlide from "@/components/slides/TitleSlide";
+import SectionSlide from "@/components/slides/SectionSlide";
+import ClosingSlide from "@/components/slides/ClosingSlide";
+import RichTipSlide from "@/components/slides/RichTipSlide";
+import { getMergedTipsPresentation } from "@/lib/mergedTips";
 
 export default function Home() {
+  const { groups, totalTips } = getMergedTipsPresentation();
+
   return (
     <Deck>
-      <Slide01 />
-      <Slide02 />
-      <Slide03 />
-      <Slide04 />
-      <Slide05 />
-      <Slide06 />
-      <Slide07 />
-      <Slide08 />
-      <Slide09 />
-      <Slide10 />
+      <TitleSlide
+        title="Claude Code Tips & Tricks"
+        subtitle="Complete slide extraction from merged research notes"
+        presenter="Diogo Cardoso"
+        date="2026"
+      />
+
+      {groups.flatMap((group, groupIndex) => [
+        <SectionSlide
+          key={`section-${group.title}`}
+          number={groupIndex + 1}
+          title={group.title}
+          description={`${group.description} (${group.tips.length} slides)`}
+        />,
+        ...group.tips.map((tip) => (
+          <RichTipSlide
+            key={`${group.title}-${tip.sourceSection}-${tip.title}`}
+            title={tip.title}
+            description={tip.description}
+            tags={tip.tags}
+            sources={tip.sources}
+            blocks={tip.blocks}
+            sourceSection={tip.sourceSection}
+            uncertain={tip.uncertain}
+          />
+        )),
+      ])}
+
+      <ClosingSlide
+        title="Extraction Complete"
+        takeaways={[
+          `All merged tips were converted into slides (${totalTips} total).`,
+          "Section layout was reorganized for workshop navigation.",
+          "You can now trim, reorder, and polish as needed.",
+        ]}
+        contact="Source: output/MERGED-tips-and-tricks.md"
+      />
     </Deck>
   );
 }

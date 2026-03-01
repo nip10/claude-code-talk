@@ -3,6 +3,7 @@ import {
   TitleSlide,
   SectionSlide,
   TipSlide,
+  RichTipSlide,
   ClosingSlide,
 } from "@/components/slides";
 
@@ -11,6 +12,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TitleSlide,
     SectionSlide,
     TipSlide,
+    RichTipSlide,
     ClosingSlide,
     ...components,
   };
