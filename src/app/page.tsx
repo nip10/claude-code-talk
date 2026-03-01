@@ -1,52 +1,34 @@
-import Deck from "@/components/Deck";
-import TitleSlide from "@/components/slides/TitleSlide";
-import SectionSlide from "@/components/slides/SectionSlide";
-import ClosingSlide from "@/components/slides/ClosingSlide";
-import RichTipSlide from "@/components/slides/RichTipSlide";
+import Link from "next/link";
 import { getMergedTipsPresentation } from "@/lib/mergedTips";
 
 export default function Home() {
   const { groups, totalTips } = getMergedTipsPresentation();
 
   return (
-    <Deck>
-      <TitleSlide
-        title="Claude Code Tips & Tricks"
-        subtitle="Complete slide extraction from merged research notes"
-        presenter="Diogo Cardoso"
-        date="2026"
-      />
+    <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center gap-8 px-8 py-16">
+      <div className="space-y-4">
+        <p className="text-sm uppercase tracking-[0.2em] text-claude-terracotta">Workshop Deck</p>
+        <h1 className="text-5xl leading-tight">Claude Code Tips & Tricks</h1>
+        <p className="max-w-3xl text-lg text-claude-muted">
+          All merged tips are now available as shareable routes. Open the slide index to browse by
+          section, then share direct URLs for any individual slide.
+        </p>
+      </div>
 
-      {groups.flatMap((group, groupIndex) => [
-        <SectionSlide
-          key={`section-${group.title}`}
-          number={groupIndex + 1}
-          title={group.title}
-          description={`${group.description} (${group.tips.length} slides)`}
-        />,
-        ...group.tips.map((tip) => (
-          <RichTipSlide
-            key={`${group.title}-${tip.sourceSection}-${tip.title}`}
-            title={tip.title}
-            description={tip.description}
-            tags={tip.tags}
-            sources={tip.sources}
-            blocks={tip.blocks}
-            sourceSection={tip.sourceSection}
-            uncertain={tip.uncertain}
-          />
-        )),
-      ])}
-
-      <ClosingSlide
-        title="Extraction Complete"
-        takeaways={[
-          `All merged tips were converted into slides (${totalTips} total).`,
-          "Section layout was reorganized for workshop navigation.",
-          "You can now trim, reorder, and polish as needed.",
-        ]}
-        contact="Source: output/MERGED-tips-and-tricks.md"
-      />
-    </Deck>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/slides"
+          className="rounded-2xl border border-claude-border-dark bg-claude-bg-darker/70 p-6 transition hover:border-claude-terracotta/70"
+        >
+          <p className="text-sm uppercase tracking-widest text-claude-muted">Open</p>
+          <p className="mt-2 text-2xl">Slide Index</p>
+        </Link>
+        <div className="rounded-2xl border border-claude-border-dark bg-claude-bg-darker/70 p-6">
+          <p className="text-sm uppercase tracking-widest text-claude-muted">Coverage</p>
+          <p className="mt-2 text-2xl">{totalTips} tip slides</p>
+          <p className="mt-1 text-sm text-claude-muted">{groups.length} grouped sections</p>
+        </div>
+      </div>
+    </main>
   );
 }

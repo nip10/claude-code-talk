@@ -12,7 +12,7 @@
   --color-claude-border-dark: #342F2B;
   --color-claude-paper: #F2EBE3;
   --font-sans: var(--font-manrope);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-sora);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -33,7 +33,70 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-slide {
+  color: var(--color-claude-text-light);
+}
+
+.markdown-slide > * + * {
+  margin-top: 0.75rem;
+}
+
+.markdown-slide p,
+.markdown-slide li {
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-claude-text-light) 92%, white 8%);
+}
+
+.markdown-slide ul,
+.markdown-slide ol {
+  margin-left: 1rem;
+  padding-left: 0.75rem;
+}
+
+.markdown-slide li + li {
+  margin-top: 0.35rem;
+}
+
+.markdown-slide pre {
+  background: var(--color-claude-bg-darker);
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+
+.markdown-slide table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.markdown-slide th,
+.markdown-slide td {
+  border-bottom: 1px solid color-mix(in oklab, var(--color-claude-border-dark) 70%, black 30%);
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-slide th {
+  color: var(--color-claude-text-light);
+  font-weight: 600;
+}
+
+.markdown-slide td {
+  color: var(--color-claude-muted);
 }
 
 /* Code blocks (rehype-pretty-code) */

@@ -1,32 +1,21 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type SlideBlock =
-  | {
-      type: "text";
-      text: string;
-    }
-  | {
-      type: "code";
-      language: string;
-      code: string;
-    }
-  | {
-      type: "table";
-      rows: string[];
-    };
-
 export interface TipSlideData {
+  id: string;
+  slug: string;
   title: string;
   description: string;
   tags: string[];
   sources: string[];
-  blocks: SlideBlock[];
+  markdown: string;
   sourceSection: string;
+  groupTitle: string;
   uncertain: boolean;
 }
 
 export interface SlideGroup {
+  slug: string;
   title: string;
   description: string;
   tips: TipSlideData[];
@@ -82,23 +71,17 @@ const SECTION_TO_GROUP: Record<number, (typeof GROUP_ORDER)[number]> = {
   17: "Appendix",
 };
 
-function cleanSectionTitle(raw: string): string {
-  return raw.replace(/^\d+\.\s*/, "").trim();
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/`/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
 }
 
-function normalizeTextLine(line: string): string {
-  let normalized = line.trim();
-
-  if (normalized.startsWith("- ")) {
-    normalized = normalized.slice(2).trim();
-  }
-
-  if (normalized.startsWith("> ")) {
-    normalized = normalized.slice(2).trim();
-  }
-
-  normalized = normalized.replace(/^\*\*(.+?)\*\*:\s*/, "$1: ");
-  return normalized;
+function cleanSectionTitle(raw: string): string {
+  return raw.replace(/^\d+\.\s*/, "").trim();
 }
 
 function parseTags(line: string): string[] {
@@ -122,81 +105,29 @@ function parseSources(line: string): string[] {
     .filter(Boolean);
 }
 
-function parseBlocks(lines: string[]): SlideBlock[] {
-  const blocks: SlideBlock[] = [];
-  let inCode = false;
-  let codeLanguage = "text";
-  let codeLines: string[] = [];
-  let tableRows: string[] = [];
-
-  const flushTable = () => {
-    if (tableRows.length > 0) {
-      blocks.push({
-        type: "table",
-        rows: [...tableRows],
-      });
-      tableRows = [];
-    }
-  };
-
-  const flushCode = () => {
-    if (codeLines.length > 0) {
-      blocks.push({
-        type: "code",
-        language: codeLanguage,
-        code: codeLines.join("\n"),
-      });
-      codeLines = [];
-    }
-  };
-
-  for (const line of lines) {
-    const trimmed = line.trimEnd();
-    const compact = trimmed.trim();
-
-    if (inCode) {
-      if (compact.startsWith("```")) {
-        inCode = false;
-        flushCode();
-      } else {
-        codeLines.push(trimmed);
-      }
-      continue;
-    }
-
-    if (compact.startsWith("```")) {
-      flushTable();
-      inCode = true;
-      codeLanguage = compact.slice(3).trim() || "text";
-      continue;
-    }
-
-    if (compact.startsWith("|")) {
-      tableRows.push(compact);
-      continue;
-    }
-
-    flushTable();
-
-    if (!compact || compact === "---") {
-      continue;
-    }
-
-    blocks.push({
-      type: "text",
-      text: normalizeTextLine(compact),
-    });
+function extractDescription(contentLines: string[]): string {
+  const whatLine = contentLines.find((line) => line.trim().startsWith("- **What:**"));
+  if (whatLine) {
+    return whatLine.replace(/^-\s*\*\*What:\*\*\s*/, "").trim();
   }
 
-  if (inCode) {
-    flushCode();
+  const firstContent = contentLines.find((line) => line.trim());
+  if (!firstContent) {
+    return "";
   }
 
-  flushTable();
-  return blocks;
+  return firstContent
+    .trim()
+    .replace(/^-\s*/, "")
+    .replace(/^\*\*(.+?)\*\*:\s*/, "$1: ");
 }
 
-function parseTip(title: string, lines: string[], sourceSection: string): TipSlideData {
+function parseTip(
+  title: string,
+  lines: string[],
+  sourceSection: string,
+  makeId: (titleSeed: string) => string,
+): TipSlideData {
   const tags: string[] = [];
   const sources: string[] = [];
   const contentLines: string[] = [];
@@ -217,20 +148,18 @@ function parseTip(title: string, lines: string[], sourceSection: string): TipSli
     contentLines.push(line);
   }
 
-  const whatLine = contentLines.find((line) => line.trim().startsWith("- **What:**"));
-  const fallbackLine = contentLines.find((line) => line.trim());
-
-  const description = whatLine
-    ? normalizeTextLine(whatLine).replace(/^What:\s*/, "").trim()
-    : normalizeTextLine(fallbackLine ?? "");
+  const id = makeId(title);
 
   return {
+    id,
+    slug: id,
     title,
-    description,
+    description: extractDescription(contentLines),
     tags,
     sources,
-    blocks: parseBlocks(contentLines),
+    markdown: contentLines.join("\n").trim(),
     sourceSection,
+    groupTitle: "",
     uncertain: contentLines.some((line) => line.includes("[Uncertain]")),
   };
 }
@@ -242,6 +171,14 @@ function parseMergedTips(markdown: string): RawSection[] {
   let currentSection: RawSection | null = null;
   let currentTipTitle: string | null = null;
   let currentTipLines: string[] = [];
+  const slugUsage = new Map<string, number>();
+
+  const makeUniqueTipId = (titleSeed: string) => {
+    const base = slugify(titleSeed || "tip");
+    const count = slugUsage.get(base) ?? 0;
+    slugUsage.set(base, count + 1);
+    return count === 0 ? base : `${base}-${count + 1}`;
+  };
 
   const flushTip = () => {
     if (!currentSection || !currentTipTitle) {
@@ -249,7 +186,7 @@ function parseMergedTips(markdown: string): RawSection[] {
     }
 
     currentSection.tips.push(
-      parseTip(currentTipTitle, currentTipLines, currentSection.title),
+      parseTip(currentTipTitle, currentTipLines, currentSection.title, makeUniqueTipId),
     );
     currentTipTitle = null;
     currentTipLines = [];
@@ -299,10 +236,7 @@ function parseMergedTips(markdown: string): RawSection[] {
   return sections.filter((section) => section.tips.length > 0);
 }
 
-export function getMergedTipsPresentation(): {
-  groups: SlideGroup[];
-  totalTips: number;
-} {
+function buildGroups(): SlideGroup[] {
   const mergedFilePath = path.join(process.cwd(), "output", "MERGED-tips-and-tricks.md");
   const mergedContent = fs.readFileSync(mergedFilePath, "utf8");
   const parsedSections = parseMergedTips(mergedContent);
@@ -311,31 +245,89 @@ export function getMergedTipsPresentation(): {
 
   for (const section of parsedSections) {
     const bucket = section.number ? SECTION_TO_GROUP[section.number] : "Appendix";
-    const targetGroup = bucket ?? "Appendix";
+    const group = bucket ?? "Appendix";
 
-    if (!groupedTips.has(targetGroup)) {
-      groupedTips.set(targetGroup, []);
+    if (!groupedTips.has(group)) {
+      groupedTips.set(group, []);
     }
 
-    const slidesForGroup = groupedTips.get(targetGroup);
-    if (!slidesForGroup) {
+    const tips = groupedTips.get(group);
+    if (!tips) {
       continue;
     }
 
-    slidesForGroup.push(...section.tips);
+    for (const tip of section.tips) {
+      tips.push({ ...tip, groupTitle: group });
+    }
   }
 
-  const groups: SlideGroup[] = GROUP_ORDER.map((groupTitle) => {
+  return GROUP_ORDER.map((groupTitle) => {
     const tips = groupedTips.get(groupTitle) ?? [];
     return {
+      slug: slugify(groupTitle),
       title: groupTitle,
       description: GROUP_DESCRIPTION[groupTitle],
       tips,
     };
   }).filter((group) => group.tips.length > 0);
+}
+
+let memoizedGroups: SlideGroup[] | null = null;
+
+function getGroups(): SlideGroup[] {
+  if (!memoizedGroups) {
+    memoizedGroups = buildGroups();
+  }
+  return memoizedGroups;
+}
+
+export function getMergedTipsPresentation(): {
+  groups: SlideGroup[];
+  totalTips: number;
+} {
+  const groups = getGroups();
 
   return {
     groups,
     totalTips: groups.reduce((sum, group) => sum + group.tips.length, 0),
+  };
+}
+
+export function getAllTips(): TipSlideData[] {
+  return getGroups().flatMap((group) => group.tips);
+}
+
+export function getTipBySlug(slug: string): TipSlideData | null {
+  const normalized = slug.trim().toLowerCase();
+  return getAllTips().find((tip) => tip.slug === normalized) ?? null;
+}
+
+export function getGroupBySlug(slug: string): SlideGroup | null {
+  const normalized = slug.trim().toLowerCase();
+  return getGroups().find((group) => group.slug === normalized) ?? null;
+}
+
+export function getTipSlugs(): string[] {
+  return getAllTips().map((tip) => tip.slug);
+}
+
+export function getGroupSlugs(): string[] {
+  return getGroups().map((group) => group.slug);
+}
+
+export function getAdjacentTips(slug: string): {
+  previous: TipSlideData | null;
+  next: TipSlideData | null;
+} {
+  const tips = getAllTips();
+  const index = tips.findIndex((tip) => tip.slug === slug.trim().toLowerCase());
+
+  if (index === -1) {
+    return { previous: null, next: null };
+  }
+
+  return {
+    previous: index > 0 ? tips[index - 1] : null,
+    next: index < tips.length - 1 ? tips[index + 1] : null,
   };
 }

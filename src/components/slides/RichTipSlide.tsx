@@ -1,72 +1,16 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import SlideWrapper from "@/components/SlideWrapper";
 import Tag from "@/components/Tag";
-import type { SlideBlock } from "@/lib/mergedTips";
 
 interface RichTipSlideProps {
   title: string;
   description: string;
   tags: string[];
   sources: string[];
-  blocks: SlideBlock[];
+  markdown: string;
   sourceSection: string;
   uncertain?: boolean;
-}
-
-function renderTable(rows: string[]) {
-  const cleanedRows = rows
-    .map((row) => row.trim())
-    .filter(Boolean)
-    .filter((row) => !/^\|(?:\s*:?-+:?\s*\|)+\s*$/.test(row));
-
-  if (cleanedRows.length === 0) {
-    return null;
-  }
-
-  const parsed = cleanedRows.map((row) =>
-    row
-      .split("|")
-      .map((cell) => cell.trim())
-      .filter(Boolean),
-  );
-
-  if (parsed.length === 0 || parsed[0].length === 0) {
-    return null;
-  }
-
-  const [header, ...body] = parsed;
-
-  return (
-    <div className="overflow-x-auto rounded-xl border border-claude-border-dark bg-claude-bg-darker/70 p-3">
-      <table className="min-w-full border-collapse text-left text-sm">
-        <thead>
-          <tr>
-            {header.map((cell, i) => (
-              <th
-                key={`${cell}-${i}`}
-                className="border-b border-claude-border-dark px-3 py-2 font-semibold text-claude-text-light"
-              >
-                {cell}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {body.map((row, rowIndex) => (
-            <tr key={rowIndex} className="align-top">
-              {header.map((_, colIndex) => (
-                <td
-                  key={`${rowIndex}-${colIndex}`}
-                  className="border-b border-claude-border-dark/60 px-3 py-2 text-claude-muted"
-                >
-                  {row[colIndex] ?? ""}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
 }
 
 export default function RichTipSlide({
@@ -74,15 +18,12 @@ export default function RichTipSlide({
   description,
   tags,
   sources,
-  blocks,
+  markdown,
   sourceSection,
   uncertain = false,
 }: RichTipSlideProps) {
   return (
-    <SlideWrapper
-      className="justify-start py-8"
-      innerClassName="items-stretch justify-start"
-    >
+    <SlideWrapper className="justify-start py-8" innerClassName="items-stretch justify-start">
       <div className="flex h-full w-full flex-col gap-5">
         <div className="flex items-center justify-between gap-3 text-sm text-claude-muted">
           <span className="rounded-full border border-claude-border-dark px-3 py-1">
@@ -110,26 +51,8 @@ export default function RichTipSlide({
           </div>
         )}
 
-        <div className="flex-1 space-y-3 overflow-y-auto pr-1">
-          {blocks.map((block, index) => {
-            if (block.type === "text") {
-              return (
-                <p key={index} className="text-base leading-relaxed text-claude-text-light/95">
-                  {block.text}
-                </p>
-              );
-            }
-
-            if (block.type === "table") {
-              return <div key={index}>{renderTable(block.rows)}</div>;
-            }
-
-            return (
-              <pre key={index} className="overflow-x-auto rounded-xl border border-claude-border-dark bg-claude-bg-darker p-4 text-sm leading-relaxed text-claude-text-light">
-                <code>{block.code}</code>
-              </pre>
-            );
-          })}
+        <div className="markdown-slide flex-1 overflow-y-auto pr-1">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>
         </div>
 
         {sources.length > 0 && (
