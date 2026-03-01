@@ -49,18 +49,11 @@
 - **Sources:** Meta Staff Engineer, Every Level
 - **Tags:** `[Config]`
 
-### Treat CLAUDE.md as a Living, Evolving Lint File
-- **What:** When Claude makes a mistake, fix it once and update CLAUDE.md to prevent recurrence — like updating a lint config.
-- **Why it matters:** Encodes hard-won project knowledge so the same mistake never happens again, compounding quality over time.
-- **How:** After identifying a recurring error, say: "Update the CLAUDE.md rules so we never do this again." Claude will make the edit. Boris's team contributes to CLAUDE.md multiple times per week.
+### Treat CLAUDE.md as a Living Rulebook (Updated Through Claude)
+- **What:** When Claude makes a recurring mistake, add or refine a rule in `CLAUDE.md` and have Claude make the update directly.
+- **Why it matters:** This compounds team knowledge over time while keeping rule updates fast and consistent.
+- **How:** After a mistake, say: "Update the rules file so we never do this again for [X]." Review the update, keep only high-signal rules.
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
-- **Tags:** `[Config]`, `[Workflow]`
-
-### Don't Manually Edit CLAUDE.md — Ask Claude to Update It
-- **What:** Instruct Claude to update CLAUDE.md on your behalf rather than hand-editing.
-- **Why it matters:** Keeps you in the habit of describing rules in natural language and ensures Claude interprets the rule correctly.
-- **How:** Say: "Update the rules file so that [X] never happens again."
-- **Sources:** Meta Staff Engineer
 - **Tags:** `[Config]`, `[Workflow]`
 
 ### Understand the CLAUDE.md Hierarchy (Cascading Overrides)
@@ -74,32 +67,18 @@
 
 ## 2. Plan Mode
 
-### Always Start New Features in Plan Mode
-- **What:** Begin every new feature or non-trivial task in Plan Mode rather than immediately letting Claude make edits.
-- **Why it matters:** Investing time upfront to verify assumptions prevents wasted execution cycles. Boris Cherny (Claude Code's creator) never takes execution actions until a plan he approves is in place.
-- **How:** Toggle to Plan Mode, describe the feature, iterate on questions and assumptions, then switch to Accept Edits only when confident.
+### Start in Plan Mode and Pressure-Test Assumptions
+- **What:** Begin non-trivial work in Plan Mode and force clarification before any edits.
+- **Why it matters:** Most rework comes from bad assumptions, not slow coding. Upfront planning improves first-pass quality.
+- **How:** Start with a high-level goal, answer clarifying questions, challenge weak assumptions, and refine until the approach is stable.
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, Top 6 Tips
 - **Tags:** `[Workflow]`, `[Prompt Technique]`
 
-### Don't Blindly Accept the Plan — Edit It
-- **What:** Actively edit or refine Claude's plan rather than blindly hitting Enter.
-- **Why it matters:** Fixing code after the fact is more expensive than correcting the plan upfront. Accepting bad plans burns tokens and wastes time.
-- **How:** Read the full plan. Edit the plan text directly or revise your prompt and generate a new plan.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Workflow]`, `[Prompt Technique]`
-
-### Let Plan Mode Ask You Questions to Build Context
-- **What:** In Plan Mode, Claude invokes an internal "ask user questions" tool, returning structured clarifying questions.
-- **Why it matters:** Surfaces hidden assumptions and builds rich context, reducing corrections later.
-- **How:** Enter a vague or high-level goal. Answer each batch of questions; Claude iterates until it has enough context.
-- **Sources:** Every Level
-- **Tags:** `[Workflow]`, `[Prompt Technique]`
-
-### Spend More Time on Planning Than on Execution
-- **What:** Invest significant effort in the planning phase — challenge Claude's assumptions, ask for alternatives, refine the approach.
-- **Why it matters:** Code generation is fast and cheap. Planning is where quality is determined.
-- **How:** Push back on Claude's first answer. Only switch to Accept Edits when fully confident. Boris Cherny's workflow: iterate in Plan Mode until satisfied, then one-shot execute.
-- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
+### Edit the Plan Before You Execute
+- **What:** Treat the proposed plan as a draft and actively revise it before switching to execution.
+- **Why it matters:** Correcting plan defects is cheaper than fixing implementation defects.
+- **How:** Review steps, remove weak or vague actions, ask for alternatives, then execute only when the plan is explicit and testable.
+- **Sources:** Top 6 Tips, Meta Staff Engineer
 - **Tags:** `[Workflow]`, `[Prompt Technique]`
 
 ---
@@ -175,18 +154,12 @@
 - **Sources:** Skills Beginner to Pro, Why Most Developers
 - **Tags:** `[Config]`, `[Workflow]`
 
-### Use Open-Source Skill Collections as a Starting Point
-- **What:** Use publicly available skills (e.g., Vercel's React best practices, skills.mp community repository) as a foundation, then customize.
-- **Why it matters:** Reduces setup time and encodes community best practices. Skills are portable across AI tools (Cursor, Codex, etc.).
-- **How:** Browse community repositories, clone into `.claude/skills/`, customize with your context.
+### Use Third-Party Skill Collections Carefully
+- **What:** Use open-source/community skills as starting points, but treat every imported skill as untrusted until reviewed.
+- **Why it matters:** You get setup speed and reusable patterns without introducing hidden destructive behavior.
+- **How:** Audit `skill.md` and referenced scripts first, then customize locally for your repo conventions.
 - **Sources:** Top 6 Tips, Skills Beginner to Pro, Every Level
-- **Tags:** `[Config]`, `[Workflow]`
-
-### Be Cautious When Downloading Third-Party Skills
-- **What:** Review `skill.md` and all referenced scripts carefully before installing third-party skills.
-- **Why it matters:** Malicious skills could cause unintended actions (data exfiltration, destructive operations). Skills execute with real agent capabilities.
-- **Sources:** Skills Beginner to Pro
-- **Tags:** `[Gotcha]`, `[Workflow]`
+- **Tags:** `[Config]`, `[Workflow]`, `[Gotcha]`
 
 ### The Six-Step Skill Building Framework
 - **What:** Work through: (1) Name and trigger, (2) Goal — one-sentence output, (3) Step-by-step process, (4) Reference files, (5) Rules / guardrails, (6) Self-improvement loop — plan for testing and iterating.
@@ -232,13 +205,6 @@
 - **How:** Set the `model` field in the agent definition file.
 - **Sources:** Why Most Developers, Superpowers Review
 - **Tags:** `[Performance]`, `[Advanced]`, `[Config]`
-
-### Give Sub-Agents Persistent Memory
-- **What:** Sub-agents can be configured with their own persistent memory directory for accumulated knowledge across sessions.
-- **Why it matters:** A code reviewer can remember patterns it has seen; a debugger can track recurring issues.
-- **How:** Configure a memory directory in the sub-agent definition. `[Uncertain]`
-- **Sources:** Why Most Developers
-- **Tags:** `[Advanced]`, `[Config]`
 
 ### Build Dedicated Context Sub-Agents (e.g., Docs Explorer)
 - **What:** Create specialized sub-agents for documentation lookup, codebase exploration, etc., with dedicated tools.
@@ -298,12 +264,6 @@
 - **How:** "Add a post-tool-use hook that runs the linter after every file edit."
 - **Sources:** Every Level
 - **Tags:** `[Config]`, `[Workflow]`
-
-### LLM-Powered Hooks for Intelligent Decisions
-- **What:** Hooks can invoke an LLM for yes/no decisions (prompt-based) or spawn a sub-agent that reads files (agent-based).
-- **Why it matters:** Enables nuanced automation beyond simple pattern matching. `[Uncertain]`
-- **Sources:** Why Most Developers
-- **Tags:** `[Advanced]`, `[Config]`
 
 ---
 
@@ -398,26 +358,12 @@
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`, `[Shortcut]`
 
-### Use `/context` to Audit Token Usage
-- **What:** Get a visual breakdown of everything loaded in Claude's context and their token counts.
-- **Why it matters:** Identifies token bloat and helps you reason about why Claude might be behaving unexpectedly.
-- **How:** Type `/context`. Look for large offenders (MCPs are a common culprit).
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Workflow]`, `[Performance]`
-
-### Understand Context Rot
-- **What:** As the context fills (~95% capacity), Claude auto-compresses old context into summaries. At ~7,500 words of input, approximately 50% of context reliability is lost.
-- **Why it matters:** Long sessions produce increasingly unreliable outputs. Ignoring this leads to Claude "forgetting" earlier instructions.
-- **How:** Monitor the context window bar. Use sub-agents and `/compact` to keep context isolated and fresh.
-- **Sources:** Every Level
-- **Tags:** `[Performance]`, `[Gotcha]`
-
-### Use Auto-Compaction and `/compact`
-- **What:** Claude auto-compacts when context gets long. You can manually trigger with `/compact`.
-- **Why it matters:** Prevents overflow and keeps costs manageable during long sessions.
-- **How:** Let auto-compaction run passively. Use `/compact` manually to save a snapshot.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Performance]`, `[Workflow]`
+### Keep Context Healthy with `/context`, `/compact`, and Reset Discipline
+- **What:** Continuously monitor context load, compact when needed, and reset between unrelated tasks.
+- **Why it matters:** Context bloat and long-session drift reduce reliability and increase cost.
+- **How:** Use `/context` to spot heavy contributors, run `/compact` when sessions grow, and use `/clear` when switching tasks.
+- **Sources:** Meta Staff Engineer, Every Level
+- **Tags:** `[Workflow]`, `[Performance]`, `[Gotcha]`
 
 ### Use a "Second Brain" for Lazy-Loading Context
 - **What:** Maintain a local directory of project-specific context files that can be saved to and loaded from on demand.
@@ -437,19 +383,12 @@
 
 ## 9. Verification & Testing
 
-### Validation Loops Are the Most Important Agentic Concept
-- **What:** Designing a way for Claude to run its output and get feedback is the single most critical factor for autonomous quality.
-- **Why it matters:** Without a feedback loop, Claude cannot self-correct. With one, it iterates until the code compiles, tests pass, or the UI looks right.
-- **How:** Think about what "done" looks like: compile check, test runner, screenshot, log tailing. Encode the check in CLAUDE.md or as a hook.
-- **Sources:** Meta Staff Engineer, Claude Code Founder
-- **Tags:** `[Workflow]`, `[Advanced]`
-
-### Always Give Claude a Way to Verify Its Work
-- **What:** Include a verification step — such as running tests — in every task assignment.
-- **Why it matters:** Boris Cherny recommends adding a standing instruction in CLAUDE.md: "Before beginning any task, state how you will verify the result."
-- **How:** Configure access to your test runner and linting commands. Instruct Claude to run them after changes.
-- **Sources:** Claude Code Founder, Top 6 Tips
-- **Tags:** `[Workflow]`, `[Prompt Technique]`
+### Build Every Task Around a Validation Loop
+- **What:** Give Claude an explicit way to run output and receive feedback on every task.
+- **Why it matters:** Verification loops are the core mechanism for self-correction and reliable autonomy.
+- **How:** Define done criteria up front (tests, build, screenshot, logs) and require Claude to state and run verification steps.
+- **Sources:** Meta Staff Engineer, Claude Code Founder, Top 6 Tips
+- **Tags:** `[Workflow]`, `[Advanced]`, `[Prompt Technique]`
 
 ### Use Domain-Appropriate Verification Methods
 - **What:** Match the verification method to the domain: bash for scripts, browser extension for web UIs, simulator MCPs for mobile apps.
@@ -533,24 +472,12 @@
 
 ## 11. Git Worktrees & Parallel Development
 
-### Use Native Worktrees with the `-W` Flag
-- **What:** Run `claude -W` to create a new Git worktree with automatic branch isolation. Add a name: `claude -W <name>`.
-- **Why it matters:** Eliminates manual worktree setup. Each feature develops in complete isolation.
-- **How:** `claude -W dark-mode` creates a worktree for that feature. Return later with the same name.
+### Use Worktree Isolation for Parallel Feature Streams
+- **What:** Use `claude -W <name>` for isolated branches/worktrees, and optionally configure sub-agents with `isolation: worktree`.
+- **Why it matters:** Isolation prevents branch collisions and keeps parallel agent work clean.
+- **How:** Create/open worktrees with `-W`, and find local worktree folders under `.claude/worktrees/<name>`.
 - **Sources:** Claude Code Worktrees
-- **Tags:** `[Workflow]`, `[Shortcut]`
-
-### Worktrees Are Stored in `.claude/worktrees/`
-- **What:** Each worktree lives under `.claude/worktrees/<name>`.
-- **How:** Navigate there to browse isolated worktree files.
-- **Sources:** Claude Code Worktrees
-- **Tags:** `[Config]`
-
-### Enable Automatic Worktree Isolation in Sub-Agent Front Matter
-- **What:** Add `isolation: worktree` to a custom sub-agent definition to auto-create a dedicated worktree on invocation.
-- **Why it matters:** Removes manual worktree management for custom sub-agent workflows.
-- **Sources:** Claude Code Worktrees
-- **Tags:** `[Config]`, `[Advanced]`
+- **Tags:** `[Workflow]`, `[Shortcut]`, `[Config]`, `[Advanced]`
 
 ### Run Multiple Claude Instances in Parallel
 - **What:** Open multiple terminal windows/panes running separate Claude Code instances on different tasks.
@@ -566,34 +493,14 @@
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`, `[Gotcha]`
 
-### Use Cloud/Background Agents for Long-Running Tasks
-- **What:** Connect Claude Code's web version to GitHub, then offload long tasks to cloud sessions.
-- **Why it matters:** Long tasks don't block local terminals. Claude auto-creates a branch and pushes changes.
-- **How:** Connect via web UI, assign the task, enable background agent. Review the resulting PR.
-- **Sources:** Claude Code Founder
-- **Tags:** `[Workflow]`, `[Advanced]`
-
-### Use the Teleport Command to Bring Cloud Sessions Local
-- **What:** Transfer a cloud Claude Code session back into your local terminal.
-- **Why it matters:** Bridge between async cloud work and local interactive work without losing session state.
-- **Sources:** Claude Code Founder
-- **Tags:** `[Workflow]`, `[Advanced]`
-
 ---
 
 ## 12. Prompt Engineering
 
-### Write Good Prompts with Proper Context Engineering
-- **What:** Invest effort in precise, context-rich prompts rather than relying on Plan Mode to compensate for vague instructions.
-- **Why it matters:** AI output quality is directly tied to input quality. Plan Mode helps but is not a substitute for good prompting.
-- **How:** Before prompting, think about what context Claude needs: which library, which pattern, which constraints. Include it explicitly.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Prompt Technique]`, `[Workflow]`
-
-### Be Explicit Rather Than Implicit
-- **What:** If you want Claude to use a particular agent, consult documentation, or follow a specific approach — say so explicitly.
-- **Why it matters:** Claude may have access to tools but won't always use them unprompted.
-- **How:** "Use the Docs Explorer agent to look up the BetterAuth docs before implementing Google auth."
+### Use Explicit, Context-Rich Prompts
+- **What:** State constraints, desired approach, and tool expectations explicitly instead of assuming Claude will infer them.
+- **Why it matters:** Prompt precision drives output quality and reduces correction loops.
+- **How:** Include relevant stack/context details and direct instructions (e.g., which agent or docs source to use) in the initial prompt.
 - **Sources:** Top 6 Tips
 - **Tags:** `[Prompt Technique]`, `[Workflow]`
 
@@ -620,24 +527,12 @@
 - **Sources:** Top 6 Tips
 - **Tags:** `[Workflow]`, `[Gotcha]`
 
-### Write Code Yourself for Trivial Changes
-- **What:** Don't delegate trivial code changes (CSS margins, config tweaks, one-line fixes) to Claude.
-- **Why it matters:** Wastes tokens and is slower than doing it yourself with autocomplete.
+### Stay Accountable for Code Quality
+- **What:** Keep humans in the loop: do trivial edits directly, review AI output critically, and preserve deep codebase understanding.
+- **Why it matters:** Quality failures usually come from unreviewed output and reduced ownership.
+- **How:** Use Claude for leverage, not abdication; read generated diffs, reject weak code, and keep hands-on familiarity with core areas.
 - **Sources:** Top 6 Tips
-- **Tags:** `[Workflow]`, `[Performance]`
-
-### Maintain Deep Understanding of Your Codebase
-- **What:** Always ensure you understand the code Claude generates. Don't let AI usage erode your comprehension.
-- **Why it matters:** Losing codebase familiarity makes it harder to review AI output and catch mistakes.
-- **How:** Regularly read through AI-generated code. Write some code yourself. Keep the codebase mentally navigable.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Workflow]`, `[Gotcha]`
-
-### Review AI-Generated Code Critically
-- **What:** Don't blindly trust Claude's output. Accept what is good, improve or reject what isn't.
-- **Why it matters:** AI output is probabilistic. The developer remains responsible for the code.
-- **Sources:** Top 6 Tips
-- **Tags:** `[Workflow]`, `[Gotcha]`
+- **Tags:** `[Workflow]`, `[Performance]`, `[Gotcha]`
 
 ### Don't Fear Interrupting or Course Correcting
 - **What:** It's safe and recommended to interrupt Claude, change direction, or send multiple prompts while it's executing.
@@ -665,29 +560,11 @@
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`, `[Config]`
 
-### Use `/resume` to Recover a Killed Instance
-- **What:** After accidentally closing Claude Code, run `/resume` to restore the previous session.
-- **Why it matters:** Prevents loss of accumulated context from a long session.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Workflow]`, `[Shortcut]`
-
 ### Use Claude Code as a General-Purpose Orchestrator
 - **What:** Claude Code can drive Slack, BigQuery, Sentry, Notion, and other non-coding tools via MCP and CLIs.
 - **Why it matters:** Treating it only as a coding assistant undersells its capability. It can drive entire business workflows.
 - **Sources:** Claude Code Founder
 - **Tags:** `[Workflow]`, `[Advanced]`
-
-### Claude Automatically Builds Its Own Memory Over Time
-- **What:** Claude notices patterns and preferences during sessions, writes them to a memory directory, and reloads them next session.
-- **Why it matters:** Claude progressively learns your working style without manual CLAUDE.md updates.
-- **Sources:** Why Most Developers
-- **Tags:** `[Config]`, `[Workflow]`
-
-### Use Figma MCP for UI Validation
-- **What:** Install a Figma MCP to give Claude access to design specs for validating generated UI.
-- **Why it matters:** Closes the loop between design intent and code output.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Config]`, `[Front-End]`, `[Advanced]`
 
 ### Ask Claude to Add Debug Logs, Run the App, and Read Logs
 - **What:** For hard-to-reproduce bugs, ask Claude to: add debug logs, run the app, trigger actions, tail logs, and analyze.
@@ -722,12 +599,6 @@
 - **How:** Install as a plugin. Claude generates `.planning/` structure. Use the `execute` command to run phases.
 - **Sources:** Every Level
 - **Tags:** `[Workflow]`, `[Advanced]`
-
-### Explore the Plugin Ecosystem
-- **What:** Browse community-shared and Anthropic-official plugins rather than building everything from scratch.
-- **How:** Ask Claude to find plugins, or browse Anthropic's plugin documentation and community repos.
-- **Sources:** Meta Staff Engineer, Every Level
-- **Tags:** `[Workflow]`
 
 ---
 
