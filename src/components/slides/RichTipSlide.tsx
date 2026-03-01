@@ -23,7 +23,7 @@ export default function RichTipSlide({
   uncertain = false,
 }: RichTipSlideProps) {
   return (
-    <SlideWrapper className="justify-start py-8" innerClassName="items-stretch justify-start">
+    <SlideWrapper className="justify-start py-8" innerClassName="items-stretch justify-start pb-20">
       <div className="flex h-full w-full flex-col gap-5">
         <div className="flex items-center justify-between gap-3 text-sm text-claude-muted">
           <span className="rounded-full border border-claude-border-dark px-3 py-1">

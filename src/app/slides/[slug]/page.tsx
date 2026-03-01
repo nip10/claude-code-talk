@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import RichTipSlide from "@/components/slides/RichTipSlide";
+import SlideNavigation from "@/components/slides/SlideNavigation";
 import { getAdjacentTips, getTipBySlug, getTipSlugs } from "@/lib/mergedTips";
 
 interface SlidePageProps {
@@ -51,42 +51,10 @@ export default async function SlidePage({ params }: SlidePageProps) {
         sourceSection={tip.sourceSection}
         uncertain={tip.uncertain}
       />
-
-      <div className="fixed bottom-4 left-0 right-0 mx-auto flex w-full max-w-5xl items-center justify-between px-6 text-sm text-claude-muted">
-        <Link
-          href="/slides"
-          className="rounded-full border border-claude-border-dark bg-claude-bg-darker/70 px-3 py-1.5 hover:border-claude-terracotta/70"
-        >
-          All slides
-        </Link>
-        <div className="flex items-center gap-2">
-          {previous ? (
-            <Link
-              href={`/slides/${previous.slug}`}
-              className="rounded-full border border-claude-border-dark bg-claude-bg-darker/70 px-3 py-1.5 hover:border-claude-terracotta/70"
-            >
-              Prev
-            </Link>
-          ) : (
-            <span className="rounded-full border border-claude-border-dark/60 px-3 py-1.5 opacity-50">
-              Prev
-            </span>
-          )}
-
-          {next ? (
-            <Link
-              href={`/slides/${next.slug}`}
-              className="rounded-full border border-claude-border-dark bg-claude-bg-darker/70 px-3 py-1.5 hover:border-claude-terracotta/70"
-            >
-              Next
-            </Link>
-          ) : (
-            <span className="rounded-full border border-claude-border-dark/60 px-3 py-1.5 opacity-50">
-              Next
-            </span>
-          )}
-        </div>
-      </div>
+      <SlideNavigation
+        previousHref={previous ? `/slides/${previous.slug}` : undefined}
+        nextHref={next ? `/slides/${next.slug}` : undefined}
+      />
     </div>
   );
 }

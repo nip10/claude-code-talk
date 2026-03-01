@@ -5,11 +5,13 @@ import "./globals.css";
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -30,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${sora.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${manrope.className} ${manrope.variable} ${sora.variable} ${jetbrainsMono.variable} antialiased`}
       >
         {children}
       </body>

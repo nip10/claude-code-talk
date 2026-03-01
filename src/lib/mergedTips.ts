@@ -111,13 +111,31 @@ function extractDescription(contentLines: string[]): string {
     return whatLine.replace(/^-\s*\*\*What:\*\*\s*/, "").trim();
   }
 
-  const firstContent = contentLines.find((line) => line.trim());
-  if (!firstContent) {
+  const firstPlainContent = contentLines
+    .map((line) => line.trim())
+    .find((line) => {
+      if (!line) {
+        return false;
+      }
+
+      if (
+        line.startsWith("|") ||
+        line.startsWith("#") ||
+        line.startsWith(">") ||
+        line.startsWith("```") ||
+        /^---+$/.test(line)
+      ) {
+        return false;
+      }
+
+      return !/^[-*+]\s+/.test(line) && !/^\d+\.\s+/.test(line);
+    });
+
+  if (!firstPlainContent) {
     return "";
   }
 
-  return firstContent
-    .trim()
+  return firstPlainContent
     .replace(/^-\s*/, "")
     .replace(/^\*\*(.+?)\*\*:\s*/, "$1: ");
 }

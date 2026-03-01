@@ -20,20 +20,26 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
   background:
     radial-gradient(1200px 700px at 12% -20%, rgb(217 119 87 / 18%), transparent 60%),
     radial-gradient(1000px 650px at 90% 110%, rgb(217 119 87 / 14%), transparent 55%),
     var(--color-claude-bg-dark);
   color: var(--color-claude-text-light);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-manrope), "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display), system-ui, sans-serif;
+  font-family: var(--font-sora), "Sora", "Avenir Next", "Segoe UI", sans-serif;
   letter-spacing: -0.02em;
 }
 
