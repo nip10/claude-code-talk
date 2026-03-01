@@ -31,8 +31,8 @@
 ### Keep CLAUDE.md Concise — Around 300 Lines / 2.5k Tokens
 - **What:** Keep your CLAUDE.md rule file small and focused. Boris Cherny (Claude Code's creator) keeps his at ~2,500 tokens.
 - **Why it matters:** Every line is loaded into the context window at every session start. Bloated rule files increase token costs and dilute Claude's ability to follow the most important instructions.
-- **How:** Regularly audit your CLAUDE.md and remove outdated or redundant rules. Reference external files for detailed docs rather than inlining them. Prefer manual curation over `/init` bootstrapping, which often generates overly large files.
-- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, Why Most Developers
+- **How:** Regularly audit your CLAUDE.md and remove outdated or redundant rules. Keep only universally applicable instructions, and reference external files for detailed docs rather than inlining them. Prefer manual curation over `/init` bootstrapping, which often generates overly large files.
+- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, Why Most Developers, HumanLayer
 - **Tags:** `[Config]`, `[Performance]`
 
 ### Use CLAUDE.md Only for Always-On, Non-Negotiable Standards
@@ -45,9 +45,23 @@
 ### Include High-Level Architecture and Domain Context
 - **What:** Add sections covering the project's architecture, domain-specific context, key file paths, design patterns, and proprietary conventions.
 - **Why it matters:** LLMs don't know your company's proprietary patterns or custom DSLs. Documenting these prevents Claude from defaulting to generic patterns.
-- **How:** Add: project description, tech stack, key directories/file paths, architecture overview, and code snippets as examples where applicable.
-- **Sources:** Meta Staff Engineer, Every Level
+- **How:** Add project description, tech stack, key directories/file paths, and architecture overview. Prefer pointers to authoritative context (`path:line`) over copied snippets so guidance stays current.
+- **Sources:** Meta Staff Engineer, Every Level, HumanLayer
 - **Tags:** `[Config]`
+
+### Use Progressive Disclosure for Task-Specific Guidance
+- **What:** Keep CLAUDE.md lean, and place specialized guidance in separate docs (for example: build, test, conventions, architecture deep dives).
+- **Why it matters:** Improves instruction-following by keeping always-on context focused while still making rich details available on demand.
+- **How:** Add a short index of support docs with one-line descriptions. Instruct Claude to read only relevant docs before execution and prefer references to source files over duplicated examples.
+- **Sources:** HumanLayer, Why Most Developers, Skills Beginner to Pro
+- **Tags:** `[Config]`, `[Workflow]`, `[Performance]`
+
+### Claude Is Not a Linter
+- **What:** Do not use CLAUDE.md as a style-guide dump. Put formatting and linting enforcement in deterministic tools.
+- **Why it matters:** Linters and formatters are faster, cheaper, and more reliable for style compliance. Large style sections in CLAUDE.md consume context and reduce signal.
+- **How:** Run lint/format in your normal workflow (or hooks), then keep CLAUDE.md focused on architecture, constraints, and execution rules Claude cannot infer automatically.
+- **Sources:** HumanLayer, Claude Code Founder
+- **Tags:** `[Config]`, `[Workflow]`
 
 ### Treat CLAUDE.md as a Living Rulebook (Updated Through Claude)
 - **What:** When Claude makes a recurring mistake, add or refine a rule in `CLAUDE.md` and update shared `.claude` assets (`commands`, `skills`) directly.
@@ -55,13 +69,6 @@
 - **How:** After a mistake, say: "Update the rules file so we never do this again for [X]." Review the change like code, keep only high-signal rules.
 - **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, r/ClaudeCode (weekly)
 - **Tags:** `[Config]`, `[Workflow]`
-
-### Understand the CLAUDE.md Hierarchy (Cascading Overrides)
-- **What:** CLAUDE.md files cascade from enterprise-level down to local overrides. More specific files always win.
-- **Why it matters:** Allows organizations to enforce global standards while giving teams and individuals the ability to override for their context.
-- **How:** Place files at: (1) enterprise level for org-wide rules, (2) `~/CLAUDE.md` for personal cross-project preferences, (3) project root for team-shared rules, (4) local project file for personal overrides. Run `/memory` to see which files are loaded.
-- **Sources:** Meta Staff Engineer, Why Most Developers
-- **Tags:** `[Config]`, `[Advanced]`
 
 ---
 
@@ -360,16 +367,10 @@
 
 ## 8. Context Management
 
-### Use `/clear` Between Unrelated Tasks
-- **What:** Wipe the current context window when switching to a completely different task.
-- **Why it matters:** Prevents context from a completed task from "bleeding into" and corrupting a new one.
-- **Sources:** Meta Staff Engineer
-- **Tags:** `[Workflow]`, `[Shortcut]`
-
 ### Keep Context Healthy with `/context`, `/compact`, and Reset Discipline
 - **What:** Continuously monitor context load, compact when needed, and reset between unrelated tasks.
 - **Why it matters:** Context bloat and long-session drift reduce reliability and increase cost.
-- **How:** Use `/context` to spot heavy contributors, run `/compact` when sessions grow, and use `/clear` when switching tasks. Before execution, pin a task contract: inputs, expected output, and off-limits paths.
+- **How:** Use `/context` to spot heavy contributors, run `/compact` when sessions grow, and use `/clear` when switching tasks. Configure the status bar to display context usage so you can monitor burn at a glance. Before execution, pin a task contract: inputs, expected output, and off-limits paths.
 - **Sources:** Meta Staff Engineer, Every Level, r/ClaudeCode (weekly)
 - **Tags:** `[Workflow]`, `[Performance]`, `[Gotcha]`
 
