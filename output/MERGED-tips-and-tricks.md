@@ -374,12 +374,15 @@
 ### Slash Commands Reference
 | Command | Purpose |
 |---|---|
+| `/init` | Bootstrap a CLAUDE.md for the project |
 | `/clear` | Reset context between unrelated tasks |
 | `/context` | Audit what Claude currently has loaded (files, MCPs, token counts) |
 | `/compact` | Manually trigger context compaction |
 | `/memory` | View which memory/rules files are loaded |
+| `/models` | Switch the active model (Opus, Sonnet, Haiku) |
 | `/resume` | Recover a killed/closed Claude instance's context |
 | `/mcp` | Inspect installed MCPs or add new ones |
+| `/help` | Full list of shortcuts and commands |
 | `/chrome` | Open browser panel for web navigation |
 | `/permissions` | Configure command-level permission rules |
 
@@ -507,7 +510,7 @@
 - **Tags:** `[Workflow]`, `[Front-End]`
 
 ### Prioritize Agent Browser Over MCP-Based Testing in CLAUDE.md
-- **What:** Add an instruction to prefer Agent Browser for browser-based verification.
+- **What:** Add an instruction to prefer Agent Browser, falling back to Puppeteer MCP only if unavailable.
 - **Why it matters:** The Chrome Extension loads the full DOM and exhausts context quickly. Agent Browser is far more efficient.
 - **Sources:** Claude's Best Release
 - **Tags:** `[Config]`, `[Performance]`, `[Front-End]`
@@ -731,7 +734,7 @@
 ## 15. Voice Input
 
 ### Use Voice Input for Hands-Free Prompting
-- **What:** Use speech-to-text tools to dictate prompts instead of typing.
+- **What:** Use speech-to-text tools (e.g., Whisper, OpenWhispr) to dictate prompts instead of typing.
 - **Why it matters:** Faster than typing when juggling multiple Claude instances. Allows more fluid multitasking.
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`
