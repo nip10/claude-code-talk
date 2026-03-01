@@ -50,10 +50,10 @@
 - **Tags:** `[Config]`
 
 ### Treat CLAUDE.md as a Living Rulebook (Updated Through Claude)
-- **What:** When Claude makes a recurring mistake, add or refine a rule in `CLAUDE.md` and have Claude make the update directly.
-- **Why it matters:** This compounds team knowledge over time while keeping rule updates fast and consistent.
-- **How:** After a mistake, say: "Update the rules file so we never do this again for [X]." Review the update, keep only high-signal rules.
-- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder
+- **What:** When Claude makes a recurring mistake, add or refine a rule in `CLAUDE.md` and update shared `.claude` assets (`commands`, `skills`) directly.
+- **Why it matters:** This compounds team knowledge over time and turns agent behavior into reviewable team infrastructure.
+- **How:** After a mistake, say: "Update the rules file so we never do this again for [X]." Review the change like code, keep only high-signal rules.
+- **Sources:** Meta Staff Engineer, Every Level, Claude Code Founder, r/ClaudeCode (weekly)
 - **Tags:** `[Config]`, `[Workflow]`
 
 ### Understand the CLAUDE.md Hierarchy (Cascading Overrides)
@@ -161,6 +161,13 @@
 - **Sources:** Top 6 Tips, Skills Beginner to Pro, Every Level
 - **Tags:** `[Config]`, `[Workflow]`, `[Gotcha]`
 
+### Use Skills for Judgment, Hooks/Scripts for Deterministic Checks
+- **What:** Use skills for fuzzy, context-dependent workflows; use hooks/scripts for exact repeatable checks.
+- **Why it matters:** Deterministic tasks (format/lint/test/guardrails) are more reliable when they do not depend on model judgment.
+- **How:** Put "always run" checks in hooks or scripts, and reserve skills for planning, decomposition, and nuanced decision flows.
+- **Sources:** r/ClaudeAI (weekly), r/ClaudeCode (weekly)
+- **Tags:** `[Workflow]`, `[Config]`, `[Advanced]`
+
 ### The Six-Step Skill Building Framework
 - **What:** Work through: (1) Name and trigger, (2) Goal — one-sentence output, (3) Step-by-step process, (4) Reference files, (5) Rules / guardrails, (6) Self-improvement loop — plan for testing and iterating.
 - **Why it matters:** Prevents common omissions that cause skill failures.
@@ -216,7 +223,8 @@
 ### Structure Orchestrators to Delegate, Not Execute Inline
 - **What:** Master orchestrator scripts should spin up fresh sub-agents per step rather than doing everything inline.
 - **Why it matters:** Inline execution causes uncontrolled context growth. Delegation keeps the orchestrator lean.
-- **Sources:** Superpowers Review
+- **How:** Define explicit roles (e.g., architect, implementer, verifier) and enforce handoffs with compact artifacts (task brief, touched files, verification result).
+- **Sources:** Superpowers Review, r/ClaudeCode (weekly)
 - **Tags:** `[Workflow]`, `[Performance]`, `[Advanced]`
 
 ---
@@ -310,10 +318,10 @@
 - **Tags:** `[Advanced]`, `[Config]`
 
 ### Pre-Scrape Documentation to Avoid Repeated Web Searches
-- **What:** Scrape external documentation once and save as a local markdown file. Point skills to that file.
-- **Why it matters:** Processing a local file is dramatically faster and cheaper than live web searches.
-- **How:** Save docs as `references/docs-reference.md`. In skill.md: `For reference on X, see ./references/docs-reference.md`.
-- **Sources:** Skills Beginner to Pro
+- **What:** Scrape external documentation once, save it locally, and prefer batched/single-call retrieval over repeated broad searches.
+- **Why it matters:** Local docs and token-budgeted retrieval reduce context thrash, round trips, and cost.
+- **How:** Save docs as `references/docs-reference.md`; in skills point to that file. For MCP workflows, prefer one scoped retrieval call that returns only dependency-relevant snippets.
+- **Sources:** Skills Beginner to Pro, r/ClaudeAI (weekly)
 - **Tags:** `[Performance]`, `[Advanced]`
 
 ---
@@ -361,8 +369,8 @@
 ### Keep Context Healthy with `/context`, `/compact`, and Reset Discipline
 - **What:** Continuously monitor context load, compact when needed, and reset between unrelated tasks.
 - **Why it matters:** Context bloat and long-session drift reduce reliability and increase cost.
-- **How:** Use `/context` to spot heavy contributors, run `/compact` when sessions grow, and use `/clear` when switching tasks.
-- **Sources:** Meta Staff Engineer, Every Level
+- **How:** Use `/context` to spot heavy contributors, run `/compact` when sessions grow, and use `/clear` when switching tasks. Before execution, pin a task contract: inputs, expected output, and off-limits paths.
+- **Sources:** Meta Staff Engineer, Every Level, r/ClaudeCode (weekly)
 - **Tags:** `[Workflow]`, `[Performance]`, `[Gotcha]`
 
 ### Use a "Second Brain" for Lazy-Loading Context
@@ -479,6 +487,13 @@
 - **Sources:** Claude Code Worktrees
 - **Tags:** `[Workflow]`, `[Shortcut]`, `[Config]`, `[Advanced]`
 
+### Use Remote Sandboxes for Reproducible Agent Runs
+- **What:** Run Claude in a remote sandbox or VPS alias when you need clean, repeatable environments.
+- **Why it matters:** Isolation improves reproducibility, avoids local-machine drift, and reduces accidental side effects.
+- **How:** Keep a dedicated remote environment with pinned dependencies and run high-impact tasks there first before local merge.
+- **Sources:** r/ClaudeCode (weekly)
+- **Tags:** `[Workflow]`, `[Advanced]`, `[Gotcha]`
+
 ### Run Multiple Claude Instances in Parallel
 - **What:** Open multiple terminal windows/panes running separate Claude Code instances on different tasks.
 - **Why it matters:** Eliminates idle waiting time. Multiply throughput by context-switching between instances. Boris Cherny runs 5 local + 5–10 on claude.ai/code.
@@ -546,6 +561,13 @@
 - **Why it matters:** Saves time and produces consistent messages matching your tone.
 - **Sources:** Meta Staff Engineer
 - **Tags:** `[Workflow]`
+
+### Persist Phase Checkpoints in Markdown
+- **What:** Keep lightweight phase files with current plan, task checklist, and QA gates for each feature stream.
+- **Why it matters:** You can reset context aggressively without losing execution state or acceptance criteria.
+- **How:** Maintain one short markdown checkpoint per active feature, and update it at phase boundaries (plan complete, implementation complete, verification complete).
+- **Sources:** r/ClaudeCode (weekly)
+- **Tags:** `[Workflow]`, `[Performance]`, `[Advanced]`
 
 ### Use the `insights` Command to Audit Past Sessions
 - **What:** Run `claude insights` to analyze past sessions and identify patterns, mistakes, and improvements.
