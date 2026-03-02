@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Progressive Context Loading (Three Levels)"}
+  description={"Claude loads: (1) only YAML front matter (~100 tokens) to identify matches, (2) full `skill.md` (~1,000–2,000 tokens) once matched, (3) supporting reference files only if needed."}
+  tags={["[Performance]", "[Config]", "[Advanced]"]}
+>
+
+_Source section: Skills_
+- **What:** Claude loads: (1) only YAML front matter (~100 tokens) to identify matches, (2) full `skill.md` (~1,000–2,000 tokens) once matched, (3) supporting reference files only if needed.
+- **Why it matters:** Keeps overhead minimal. Only the skill description sits in context at all times.
+- **How:** Keep heavy data in separate referenced files rather than inline in skill.md.
+
+</TipSlide>

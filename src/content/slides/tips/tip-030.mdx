@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Protect Test Files from Agent Modification"}
+  description={"Set up a `pre-tool-use` hook that blocks modifications to test directories."}
+  tags={["[Config]", "[Gotcha]", "[Advanced]"]}
+>
+
+_Source section: Hooks_
+- **What:** Set up a `pre-tool-use` hook that blocks modifications to test directories.
+- **Why it matters:** Claude agents tend to modify tests to make them pass rather than fixing implementation. This hook prevents that entirely.
+- **How:** Write a script that inspects the target file path. If it includes a test directory, `echo` error message and `exit 2`.
+
+</TipSlide>

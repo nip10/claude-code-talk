@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Use Sub-Agents for Atomic, Isolated Tasks"}
+  description={"Sub-agents have their own dedicated context windows, isolated from the parent session. Only their summary output returns."}
+  tags={["[Workflow]", "[Advanced]", "[Performance]"]}
+>
+
+_Source section: Sub-Agents_
+- **What:** Sub-agents have their own dedicated context windows, isolated from the parent session. Only their summary output returns.
+- **Why it matters:** Protects the parent context from bloat. Produces higher-quality outputs through specialization.
+- **How:** Create definitions in `.claude/agents/` with description, allowed tools, and task definition. Built-in agents: `explore` (read-only), `plan` (research), `general-purpose` (all tools).
+
+</TipSlide>

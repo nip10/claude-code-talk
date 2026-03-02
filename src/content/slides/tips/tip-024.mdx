@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Have Sub-Agents Return File Paths, Not Full Content"}
+  description={"Configure sub-agents to save output to files and return only file paths."}
+  tags={["[Performance]", "[Gotcha]", "[Advanced]"]}
+>
+
+_Source section: Sub-Agents_
+- **What:** Configure sub-agents to save output to files and return only file paths.
+- **Why it matters:** If sub-agents return full content, the parent context grows rapidly and hits token limits mid-run.
+- **How:** In sub-agent instructions, explicitly state: "Save output to a file and return only the file path."
+
+</TipSlide>

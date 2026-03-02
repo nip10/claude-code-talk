@@ -1,0 +1,14 @@
+<TipSlide
+  title={"Pre-Scrape Documentation to Avoid Repeated Web Searches"}
+  description={"Scrape external documentation once, save it locally, and prefer batched/single-call retrieval over repeated broad searches."}
+  tags={["[Performance]", "[Advanced]"]}
+>
+
+_Source section: MCP Servers_
+- **What:** Scrape external documentation once, save it locally, and prefer batched/single-call retrieval over repeated broad searches.
+- **Why it matters:** Local docs and token-budgeted retrieval reduce context thrash, round trips, and cost.
+- **How:** Save docs as `references/docs-reference.md`; in skills point to that file. For MCP workflows, prefer one scoped retrieval call that returns only dependency-relevant snippets.
+
+---
+
+</TipSlide>
