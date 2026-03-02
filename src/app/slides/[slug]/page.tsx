@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import RichTipSlide from "@/components/slides/RichTipSlide";
 import SlideNavigation from "@/components/slides/SlideNavigation";
-import { getAdjacentTips, getTipBySlug, getTipSlugs } from "@/lib/mergedTips";
+import { getAdjacentSlides, getSlideBySlug, getSlideSlugs } from "@/lib/slides";
 
 interface SlidePageProps {
   params: Promise<{
@@ -11,46 +10,39 @@ interface SlidePageProps {
 }
 
 export async function generateStaticParams() {
-  return getTipSlugs().map((slug) => ({ slug }));
+  return getSlideSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: SlidePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const tip = getTipBySlug(slug);
+  const slide = getSlideBySlug(slug);
 
-  if (!tip) {
+  if (!slide) {
     return {
       title: "Slide Not Found",
     };
   }
 
   return {
-    title: `${tip.title} | Claude Code Tips`,
-    description: tip.description || "Claude Code tip slide",
+    title: `${slide.title} | Claude Code Tips`,
+    description: slide.description || "Claude Code slide",
   };
 }
 
 export default async function SlidePage({ params }: SlidePageProps) {
   const { slug } = await params;
-  const tip = getTipBySlug(slug);
+  const slide = getSlideBySlug(slug);
 
-  if (!tip) {
+  if (!slide) {
     notFound();
   }
 
-  const { previous, next } = getAdjacentTips(slug);
+  const { previous, next } = getAdjacentSlides(slug);
+  const SlideComponent = slide.Component;
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
-      <RichTipSlide
-        title={tip.title}
-        description={tip.description}
-        tags={tip.tags}
-        sources={tip.sources}
-        markdown={tip.markdown}
-        sourceSection={tip.sourceSection}
-        uncertain={tip.uncertain}
-      />
+      <SlideComponent />
       <SlideNavigation
         previousHref={previous ? `/slides/${previous.slug}` : undefined}
         nextHref={next ? `/slides/${next.slug}` : undefined}
