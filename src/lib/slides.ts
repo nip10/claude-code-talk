@@ -10,6 +10,12 @@ import Slide07KeyboardShortcuts from "@/content/slides/07-tip-keyboard-shortcuts
 import Slide08Advanced from "@/content/slides/08-section-advanced.mdx";
 import Slide09CustomTools from "@/content/slides/09-tip-custom-tools.mdx";
 import Slide10Closing from "@/content/slides/10-closing.mdx";
+import Slide11ChoosingMechanism from "@/content/slides/11-section-choosing-mechanism.mdx";
+import Slide12MechanismComparison from "@/content/slides/12-overview-mechanism-comparison.mdx";
+import Slide13MechanismClaudeMd from "@/content/slides/13-mechanism-claude-md.mdx";
+import Slide14MechanismCommands from "@/content/slides/14-mechanism-commands.mdx";
+import Slide15MechanismSkills from "@/content/slides/15-mechanism-skills.mdx";
+import Slide16MechanismHooks from "@/content/slides/16-mechanism-hooks.mdx";
 
 export interface SlideData {
   slug: string;
@@ -123,6 +129,60 @@ const RAW_SLIDES: SlideData[] = [
     tags: ["MCP", "Extensibility"],
     sources: [],
     Component: Slide09CustomTools,
+  },
+  {
+    slug: "choosing-the-right-mechanism",
+    title: "Choosing the Right Mechanism",
+    description: "When to use CLAUDE.md, Commands, Skills, and Hooks for the same task.",
+    groupTitle: "Advanced",
+    tags: ["Mechanisms", "Architecture"],
+    sources: [],
+    Component: Slide11ChoosingMechanism,
+  },
+  {
+    slug: "mechanism-overview",
+    title: "CLAUDE.md vs Commands vs Skills vs Hooks",
+    description: "A quick matrix for selecting the right mechanism.",
+    groupTitle: "Advanced",
+    tags: ["Mechanisms", "Decision Guide"],
+    sources: [],
+    Component: Slide12MechanismComparison,
+  },
+  {
+    slug: "mechanism-claude-md",
+    title: "CLAUDE.md: Persistent Project Context",
+    description: "Use CLAUDE.md for stable defaults and repo-wide guidance.",
+    groupTitle: "Advanced",
+    tags: ["Context", "Foundations"],
+    sources: [],
+    Component: Slide13MechanismClaudeMd,
+  },
+  {
+    slug: "mechanism-commands",
+    title: "Commands: Reusable On-Demand Workflows",
+    description: "Use slash commands for repeatable operations you trigger manually.",
+    groupTitle: "Advanced",
+    tags: ["Workflow", "Commands"],
+    sources: [],
+    Component: Slide14MechanismCommands,
+  },
+  {
+    slug: "mechanism-skills",
+    title: "Skills: Structured Capability Bundles",
+    description: "Use skills for specialized multi-step workflows with clear process guidance.",
+    groupTitle: "Advanced",
+    tags: ["Skills", "Reliability"],
+    sources: [],
+    Component: Slide15MechanismSkills,
+  },
+  {
+    slug: "mechanism-hooks",
+    title: "Hooks: Automatic Guardrails",
+    description: "Use hooks for always-on validation and policy checks.",
+    groupTitle: "Advanced",
+    tags: ["Hooks", "Guardrails"],
+    sources: [],
+    Component: Slide16MechanismHooks,
   },
   {
     slug: "closing",

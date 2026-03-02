@@ -1,0 +1,31 @@
+<TipSlide
+  title="Hooks: Automatic Guardrails"
+  description="Use hooks to run checks automatically on events like tool calls or stop points."
+  tags={["Hooks", "Guardrails"]}
+>
+
+Use when: policy or safety checks must happen every time.
+
+Avoid when: humans should decide whether to run the workflow.
+
+Example: runs before every Bash tool call.
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 scripts/validate_command.py"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+</TipSlide>

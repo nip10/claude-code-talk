@@ -5,6 +5,7 @@ import {
   TipSlide,
   RichTipSlide,
   ClosingSlide,
+  MechanismComparisonSlide,
 } from "@/components/slides";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -14,6 +15,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TipSlide,
     RichTipSlide,
     ClosingSlide,
+    MechanismComparisonSlide,
     ...components,
   };
 }

@@ -1,0 +1,26 @@
+<TipSlide
+  title="Skills: Structured Capability Bundles"
+  description="Use skills when a workflow needs explicit step-by-step guidance and reusable context."
+  tags={["Skills", "Reliability"]}
+>
+
+Use when: a task has recurring multi-step flow and quality gates.
+
+Avoid when: a single paragraph in CLAUDE.md is enough.
+
+```markdown
+# SKILL.md
+
+## Name
+Write release notes
+
+## Trigger
+When user asks for release notes from commits
+
+## Workflow
+1. Read recent commits
+2. Group by feature/fix/chore
+3. Produce concise summary + risks
+```
+
+</TipSlide>
