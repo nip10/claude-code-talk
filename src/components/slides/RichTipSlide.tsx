@@ -32,7 +32,7 @@ export default function RichTipSlide({
           </span>
           {uncertain && (
             <span className="rounded-full border border-claude-terracotta/50 bg-claude-terracotta/15 px-3 py-1 text-claude-terracotta">
-              Contains [Uncertain]
+              Uncertain
             </span>
           )}
         </div>
