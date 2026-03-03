@@ -16,6 +16,17 @@ import Slide13MechanismClaudeMd from "@/content/slides/13-mechanism-claude-md.md
 import Slide14MechanismCommands from "@/content/slides/14-mechanism-commands.mdx";
 import Slide15MechanismSkills from "@/content/slides/15-mechanism-skills.mdx";
 import Slide16MechanismHooks from "@/content/slides/16-mechanism-hooks.mdx";
+import Slide17WorkflowHowIActuallyWork from "@/content/slides/17-workflow-how-i-actually-work.mdx";
+import Slide18MyCoreStack from "@/content/slides/18-my-core-stack.mdx";
+import Slide19FrontendVerificationFirst from "@/content/slides/19-frontend-verification-first.mdx";
+import Slide20McpsFrontendEdition from "@/content/slides/20-mcps-frontend-edition.mdx";
+import Slide21CoolUseCasesVisualUxQa from "@/content/slides/21-cool-use-cases-visual-ux-qa.mdx";
+import Slide22CoolUseCasesDeliveryWorkflow from "@/content/slides/22-cool-use-cases-delivery-workflow.mdx";
+import Slide23PluginsAndSkillsThatImproveOutputQuality from "@/content/slides/23-plugins-and-skills-that-improve-output-quality.mdx";
+import Slide24WhatTeamsAreActuallyUsing from "@/content/slides/24-what-teams-are-actually-using.mdx";
+import Slide25WhatYouAreProbablyMissing from "@/content/slides/25-what-you-are-probably-missing.mdx";
+import Slide26StartNextWeekFrontendRolloutPlan from "@/content/slides/26-start-next-week-frontend-rollout-plan.mdx";
+import Slide27RecommendedAnthropicSkillExamples from "@/content/slides/27-recommended-anthropic-skill-examples.mdx";
 import GeneratedTip001 from "@/content/slides/tips/tip-001.mdx";
 import GeneratedTip002 from "@/content/slides/tips/tip-002.mdx";
 import GeneratedTip003 from "@/content/slides/tips/tip-003.mdx";
@@ -1013,6 +1024,105 @@ const RAW_SLIDES: SlideData[] = [
     tags: [],
     sources: [],
     Component: GeneratedTip083,
+  },
+  {
+    slug: "workflow-how-i-actually-work",
+    title: "Workflow: How I Actually Work",
+    description: "From ticket context to verified UI changes.",
+    groupTitle: "Workflow",
+    tags: ["Workflow", "Process", "Front-end"],
+    sources: [],
+    Component: Slide17WorkflowHowIActuallyWork,
+  },
+  {
+    slug: "my-core-stack",
+    title: "My Core Stack",
+    description: "The tool chain I use daily and when each tool is best.",
+    groupTitle: "Workflow",
+    tags: ["Tools", "Workflow", "Productivity"],
+    sources: [],
+    Component: Slide18MyCoreStack,
+  },
+  {
+    slug: "front-end-verification-first",
+    title: "Front-end Focus: Verification First",
+    description: "For UI work, code is not done until the interface is verified.",
+    groupTitle: "Workflow",
+    tags: ["Front-end", "Quality", "Verification"],
+    sources: [],
+    Component: Slide19FrontendVerificationFirst,
+  },
+  {
+    slug: "mcps-front-end-edition",
+    title: "MCPs I Use Most (Front-end Edition)",
+    description: "Practical MCPs that speed up UI delivery and debugging.",
+    groupTitle: "Workflow",
+    tags: ["MCP", "Front-end", "Tooling"],
+    sources: [],
+    Component: Slide20McpsFrontendEdition,
+  },
+  {
+    slug: "cool-use-cases-visual-and-ux-qa",
+    title: "Cool Use Cases: Visual and UX QA",
+    description: "High-leverage checks before human review.",
+    groupTitle: "Workflow",
+    tags: ["Use Cases", "Front-end", "QA"],
+    sources: [],
+    Component: Slide21CoolUseCasesVisualUxQa,
+  },
+  {
+    slug: "cool-use-cases-delivery-workflow",
+    title: "Cool Use Cases: Delivery Workflow",
+    description: "Turn context into tickets, execution, and cleaner handoffs.",
+    groupTitle: "Workflow",
+    tags: ["Use Cases", "Delivery", "Jira", "GitHub"],
+    sources: [],
+    Component: Slide22CoolUseCasesDeliveryWorkflow,
+  },
+  {
+    slug: "plugins-and-skills-that-improve-output-quality",
+    title: "Plugins and Skills That Improve Output Quality",
+    description: "The biggest gains come from process discipline, not magic prompts.",
+    groupTitle: "Advanced",
+    tags: ["Skills", "Plugins", "Reliability"],
+    sources: [],
+    Component: Slide23PluginsAndSkillsThatImproveOutputQuality,
+  },
+  {
+    slug: "what-teams-are-actually-using",
+    title: "What Teams Are Actually Using",
+    description: "Common stack pattern I see in high-output teams.",
+    groupTitle: "Advanced",
+    tags: ["Team Patterns", "Workflow", "Field Notes"],
+    sources: [],
+    Component: Slide24WhatTeamsAreActuallyUsing,
+  },
+  {
+    slug: "what-you-are-probably-missing",
+    title: "What You Are Probably Missing",
+    description: "Gaps that matter once teams move beyond basic prompting.",
+    groupTitle: "Advanced",
+    tags: ["Guardrails", "Reliability", "Scale"],
+    sources: [],
+    Component: Slide25WhatYouAreProbablyMissing,
+  },
+  {
+    slug: "start-next-week-front-end-rollout-plan",
+    title: "Start Next Week: Front-end Rollout Plan",
+    description: "Adopt this in small steps and measure quality impact quickly.",
+    groupTitle: "Advanced",
+    tags: ["Adoption", "Front-end", "Team Enablement"],
+    sources: [],
+    Component: Slide26StartNextWeekFrontendRolloutPlan,
+  },
+  {
+    slug: "recommended-anthropic-skill-examples",
+    title: "Recommended Anthropic Skill Examples",
+    description: "High-value examples to borrow for front-end teams.",
+    groupTitle: "Advanced",
+    tags: ["Skills", "Front-end", "Examples"],
+    sources: [],
+    Component: Slide27RecommendedAnthropicSkillExamples,
   },
   {
     slug: "closing",
