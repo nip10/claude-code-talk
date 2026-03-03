@@ -1,12 +1,12 @@
 <TipSlide
-  title={"Auto-Format Every File Claude Writes"}
-  description={"Use a post-tool-use hook matching `write` and `edit` tools to automatically run a formatter."}
-  tags={["Config", "Workflow"]}
+  title={"Automate Quality with Post-Tool-Use and Stop Hooks"}
+  description={"Use hooks to auto-format files and run verification whenever Claude writes code or finishes a task."}
+  tags={["Config", "Workflow", "Advanced"]}
 >
 
 _Source section: Hooks_
-- **What:** Use a post-tool-use hook matching `write` and `edit` tools to automatically run a formatter.
-- **Why it matters:** Ensures consistent formatting without relying on Claude choosing to format.
-- **How:** Configure a post-tool-use hook that runs your formatter (e.g., `prettier --write [file]`).
+- **What:** Use post-tool-use hooks to auto-format files and stop hooks to run tests/linters whenever Claude finishes.
+- **Why it matters:** Ensures consistent formatting without relying on Claude, and guarantees verification never gets skipped — even when you're not watching.
+- **How:** Configure a post-tool-use hook that runs your formatter (e.g., `prettier --write [file]`) on `write` and `edit` tools. Add a stop hook that executes your test or lint command at every stopping point.
 
 </TipSlide>

@@ -2,10 +2,7 @@ import type { ComponentType } from "react";
 
 import Slide01Title from "@/content/slides/01-title.mdx";
 import Slide02GettingStarted from "@/content/slides/02-section-getting-started.mdx";
-import Slide03ClaudeMd from "@/content/slides/03-tip-claude-md.mdx";
-import Slide04SlashCommands from "@/content/slides/04-tip-slash-commands.mdx";
 import Slide05Workflow from "@/content/slides/05-section-workflow.mdx";
-import Slide06Subagents from "@/content/slides/06-tip-subagents.mdx";
 import Slide07KeyboardShortcuts from "@/content/slides/07-tip-keyboard-shortcuts.mdx";
 import Slide08Advanced from "@/content/slides/08-section-advanced.mdx";
 import Slide09CustomTools from "@/content/slides/09-tip-custom-tools.mdx";
@@ -34,7 +31,7 @@ import GeneratedTip004 from "@/content/slides/tips/tip-004.mdx";
 import GeneratedTip005 from "@/content/slides/tips/tip-005.mdx";
 import GeneratedTip006 from "@/content/slides/tips/tip-006.mdx";
 import GeneratedTip007 from "@/content/slides/tips/tip-007.mdx";
-import GeneratedTip008 from "@/content/slides/tips/tip-008.mdx";
+
 import GeneratedTip009 from "@/content/slides/tips/tip-009.mdx";
 import GeneratedTip010 from "@/content/slides/tips/tip-010.mdx";
 import GeneratedTip011 from "@/content/slides/tips/tip-011.mdx";
@@ -57,18 +54,18 @@ import GeneratedTip027 from "@/content/slides/tips/tip-027.mdx";
 import GeneratedTip028 from "@/content/slides/tips/tip-028.mdx";
 import GeneratedTip029 from "@/content/slides/tips/tip-029.mdx";
 import GeneratedTip030 from "@/content/slides/tips/tip-030.mdx";
-import GeneratedTip031 from "@/content/slides/tips/tip-031.mdx";
+
 import GeneratedTip032 from "@/content/slides/tips/tip-032.mdx";
-import GeneratedTip033 from "@/content/slides/tips/tip-033.mdx";
+
 import GeneratedTip034 from "@/content/slides/tips/tip-034.mdx";
 import GeneratedTip035 from "@/content/slides/tips/tip-035.mdx";
 import GeneratedTip036 from "@/content/slides/tips/tip-036.mdx";
 import GeneratedTip037 from "@/content/slides/tips/tip-037.mdx";
 import GeneratedTip038 from "@/content/slides/tips/tip-038.mdx";
-import GeneratedTip039 from "@/content/slides/tips/tip-039.mdx";
+
 import GeneratedTip040 from "@/content/slides/tips/tip-040.mdx";
 import GeneratedTip041 from "@/content/slides/tips/tip-041.mdx";
-import GeneratedTip042 from "@/content/slides/tips/tip-042.mdx";
+
 import GeneratedTip043 from "@/content/slides/tips/tip-043.mdx";
 import GeneratedTip044 from "@/content/slides/tips/tip-044.mdx";
 import GeneratedTip045 from "@/content/slides/tips/tip-045.mdx";
@@ -93,8 +90,7 @@ import GeneratedTip063 from "@/content/slides/tips/tip-063.mdx";
 import GeneratedTip064 from "@/content/slides/tips/tip-064.mdx";
 import GeneratedTip065 from "@/content/slides/tips/tip-065.mdx";
 import GeneratedTip066 from "@/content/slides/tips/tip-066.mdx";
-import GeneratedTip067 from "@/content/slides/tips/tip-067.mdx";
-import GeneratedTip068 from "@/content/slides/tips/tip-068.mdx";
+
 import GeneratedTip069 from "@/content/slides/tips/tip-069.mdx";
 import GeneratedTip070 from "@/content/slides/tips/tip-070.mdx";
 import GeneratedTip071 from "@/content/slides/tips/tip-071.mdx";
@@ -108,8 +104,7 @@ import GeneratedTip078 from "@/content/slides/tips/tip-078.mdx";
 import GeneratedTip079 from "@/content/slides/tips/tip-079.mdx";
 import GeneratedTip080 from "@/content/slides/tips/tip-080.mdx";
 import GeneratedTip081 from "@/content/slides/tips/tip-081.mdx";
-import GeneratedTip082 from "@/content/slides/tips/tip-082.mdx";
-import GeneratedTip083 from "@/content/slides/tips/tip-083.mdx";
+
 
 export interface SlideData {
   slug: string;
@@ -160,24 +155,6 @@ const RAW_SLIDES: SlideData[] = [
     Component: Slide02GettingStarted,
   },
   {
-    slug: "keep-claude-md-concise",
-    title: "Keep CLAUDE.md Concise",
-    description: "Aim for ~300 lines / 2.5k tokens. Claude reads this file at the start of every task.",
-    groupTitle: "Getting Started",
-    tags: ["Config", "Performance"],
-    sources: [],
-    Component: Slide03ClaudeMd,
-  },
-  {
-    slug: "use-slash-commands",
-    title: "Use Slash Commands",
-    description: "Type / in the prompt to see built-in commands like /compact, /review, and /commit.",
-    groupTitle: "Getting Started",
-    tags: ["Workflow", "Productivity"],
-    sources: [],
-    Component: Slide04SlashCommands,
-  },
-  {
     slug: "workflow",
     title: "Workflow",
     description: "Day-to-day patterns that keep you productive with Claude Code.",
@@ -185,16 +162,6 @@ const RAW_SLIDES: SlideData[] = [
     tags: [],
     sources: [],
     Component: Slide05Workflow,
-  },
-  {
-    slug: "leverage-sub-agents",
-    title: "Leverage Sub-agents",
-    description:
-      "Claude can spawn sub-agents to handle research or parallel tasks without cluttering the main context.",
-    groupTitle: "Workflow",
-    tags: ["Architecture", "Advanced"],
-    sources: [],
-    Component: Slide06Subagents,
   },
   {
     slug: "keyboard-shortcuts",
@@ -335,20 +302,11 @@ const RAW_SLIDES: SlideData[] = [
   {
     slug: "start-in-plan-mode-and-pressure-test-assumptions",
     title: "Start in Plan Mode and Pressure-Test Assumptions",
-    description: "Begin non-trivial work in Plan Mode and force clarification before any edits.",
+    description: "Begin non-trivial work in Plan Mode, force clarification before any edits, and actively revise the plan before executing.",
     groupTitle: "Getting Started",
     tags: ["Workflow", "Prompt Technique"],
     sources: ["Meta Staff Engineer", "Every Level", "Claude Code Founder", "Top 6 Tips"],
     Component: GeneratedTip007,
-  },
-  {
-    slug: "edit-the-plan-before-you-execute",
-    title: "Edit the Plan Before You Execute",
-    description: "Treat the proposed plan as a draft and actively revise it before switching to execution.",
-    groupTitle: "Getting Started",
-    tags: ["Workflow", "Prompt Technique"],
-    sources: ["Top 6 Tips", "Meta Staff Engineer"],
-    Component: GeneratedTip008,
   },
   {
     slug: "skills-are-reusable-markdown-based-sops",
@@ -541,39 +499,21 @@ const RAW_SLIDES: SlideData[] = [
   },
   {
     slug: "protect-test-files-from-agent-modification",
-    title: "Protect Test Files from Agent Modification",
-    description: "Set up a `pre-tool-use` hook that blocks modifications to test directories.",
+    title: "Block Unwanted Modifications with Pre-Tool-Use Hooks",
+    description: "Set up pre-tool-use hooks that block modifications to test directories and intercept destructive shell commands.",
     groupTitle: "Workflow",
     tags: ["Config", "Gotcha", "Advanced"],
-    sources: ["Claude's Best Release"],
+    sources: ["Claude's Best Release", "Why Most Developers", "Meta Staff Engineer"],
     Component: GeneratedTip030,
   },
   {
-    slug: "block-destructive-shell-commands",
-    title: "Block Destructive Shell Commands",
-    description: "Use a pre-tool-use hook matching the `bash` tool to intercept dangerous commands (e.g., `rm -rf`).",
-    groupTitle: "Workflow",
-    tags: ["Config", "Advanced", "Gotcha"],
-    sources: ["Why Most Developers", "Meta Staff Engineer"],
-    Component: GeneratedTip031,
-  },
-  {
-    slug: "auto-format-every-file-claude-writes",
-    title: "Auto-Format Every File Claude Writes",
-    description: "Use a post-tool-use hook matching `write` and `edit` tools to automatically run a formatter.",
-    groupTitle: "Workflow",
-    tags: ["Config", "Workflow"],
-    sources: ["Why Most Developers", "Every Level"],
-    Component: GeneratedTip032,
-  },
-  {
-    slug: "use-a-stop-hook-for-automatic-verification",
-    title: "Use a Stop Hook for Automatic Verification",
-    description: "Configure a stop hook that runs tests/linters whenever Claude finishes generating output.",
+    slug: "automate-quality-with-post-tool-use-and-stop-hooks",
+    title: "Automate Quality with Post-Tool-Use and Stop Hooks",
+    description: "Use hooks to auto-format files and run verification whenever Claude writes code or finishes a task.",
     groupTitle: "Workflow",
     tags: ["Config", "Workflow", "Advanced"],
-    sources: ["Claude Code Founder"],
-    Component: GeneratedTip033,
+    sources: ["Why Most Developers", "Every Level", "Claude Code Founder"],
+    Component: GeneratedTip032,
   },
   {
     slug: "ask-claude-to-write-your-hooks-don-t-hand-craft-them",
@@ -612,22 +552,13 @@ const RAW_SLIDES: SlideData[] = [
     Component: GeneratedTip037,
   },
   {
-    slug: "let-claude-install-mcps-for-you",
-    title: "Let Claude Install MCPs for You",
-    description: "Ask Claude: \"Find and install a good [tool] MCP.\" Claude will locate, recommend, and wire it up.",
+    slug: "let-claude-install-and-manage-mcps-for-you",
+    title: "Let Claude Install and Manage MCPs for You",
+    description: "Ask Claude to find and install MCPs, or use `/mcp` to inspect and add them directly.",
     groupTitle: "Workflow",
     tags: ["Config", "Workflow"],
-    sources: ["Meta Staff Engineer"],
-    Component: GeneratedTip038,
-  },
-  {
-    slug: "use-mcp-to-inspect-and-manage-mcps",
-    title: "Use `/mcp` to Inspect and Manage MCPs",
-    description: "Run `/mcp` to see installed MCPs. Use `/mcp add [service]` to install new ones.",
-    groupTitle: "Workflow",
-    tags: ["Config", "Shortcut"],
     sources: ["Meta Staff Engineer", "Every Level"],
-    Component: GeneratedTip039,
+    Component: GeneratedTip038,
   },
   {
     slug: "mcp-tools-are-available-across-all-features",
@@ -646,15 +577,6 @@ const RAW_SLIDES: SlideData[] = [
     tags: ["Performance", "Advanced"],
     sources: ["Skills Beginner to Pro", "r/ClaudeAI (weekly)"],
     Component: GeneratedTip041,
-  },
-  {
-    slug: "keyboard-shortcuts-2",
-    title: "Keyboard Shortcuts",
-    description: "Tip from Keyboard Shortcuts & Slash Commands.",
-    groupTitle: "Workflow",
-    tags: [],
-    sources: ["Meta Staff Engineer", "Claude Code Worktrees"],
-    Component: GeneratedTip042,
   },
   {
     slug: "slash-commands-reference",
@@ -864,31 +786,13 @@ const RAW_SLIDES: SlideData[] = [
     Component: GeneratedTip065,
   },
   {
-    slug: "avoid-autonomous-ai-loops-stay-in-control",
-    title: "Avoid Autonomous AI Loops — Stay in Control",
-    description: "Do not run Claude Code in fully autonomous loops without oversight. Stay hands-on and review each step.",
+    slug: "maintain-human-oversight-stay-in-control",
+    title: "Maintain Human Oversight — Stay in Control",
+    description: "Stay hands-on: avoid autonomous loops, review AI output critically, and don't fear interrupting Claude.",
     groupTitle: "Workflow",
     tags: ["Workflow", "Gotcha"],
-    sources: ["Top 6 Tips"],
+    sources: ["Top 6 Tips", "Meta Staff Engineer"],
     Component: GeneratedTip066,
-  },
-  {
-    slug: "stay-accountable-for-code-quality",
-    title: "Stay Accountable for Code Quality",
-    description: "Keep humans in the loop: do trivial edits directly, review AI output critically, and preserve deep codebase understanding.",
-    groupTitle: "Workflow",
-    tags: ["Workflow", "Performance", "Gotcha"],
-    sources: ["Top 6 Tips"],
-    Component: GeneratedTip067,
-  },
-  {
-    slug: "don-t-fear-interrupting-or-course-correcting",
-    title: "Don't Fear Interrupting or Course Correcting",
-    description: "It's safe and recommended to interrupt Claude, change direction, or send multiple prompts while it's executing.",
-    groupTitle: "Workflow",
-    tags: ["Workflow"],
-    sources: ["Meta Staff Engineer"],
-    Component: GeneratedTip068,
   },
   {
     slug: "ask-claude-to-write-git-commit-messages-and-pr-summaries",
@@ -999,31 +903,13 @@ const RAW_SLIDES: SlideData[] = [
     Component: GeneratedTip080,
   },
   {
-    slug: "philosophical-industry-observations",
-    title: "Philosophical & Industry Observations",
-    description: "Tip from Raw Notes & Observations.",
+    slug: "notes-and-observations",
+    title: "Notes & Observations",
+    description: "Collected insights from practitioners and the Claude Code ecosystem.",
     groupTitle: "Advanced",
     tags: [],
     sources: [],
     Component: GeneratedTip081,
-  },
-  {
-    slug: "workflow-observations",
-    title: "Workflow Observations",
-    description: "Tip from Raw Notes & Observations.",
-    groupTitle: "Advanced",
-    tags: [],
-    sources: [],
-    Component: GeneratedTip082,
-  },
-  {
-    slug: "tool-ecosystem-notes",
-    title: "Tool & Ecosystem Notes",
-    description: "Tip from Raw Notes & Observations.",
-    groupTitle: "Advanced",
-    tags: [],
-    sources: [],
-    Component: GeneratedTip083,
   },
   {
     slug: "workflow-how-i-actually-work",
