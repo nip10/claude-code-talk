@@ -1,0 +1,12 @@
+<TipSlide
+  title={"CLAUDE.md: What Belongs and What Doesn't"}
+  description={"Only include always-on, non-negotiable standards and high-level architecture context in CLAUDE.md."}
+  tags={["Config", "Performance"]}
+>
+
+- **Always-on standards only:** CLAUDE.md should contain rules that apply to every task and every conversation. Move task-specific content to skills.
+- **Decision matrix:** "Should Claude always know this?" → CLAUDE.md. "Sometimes?" → Skills. "In isolation?" → Sub-agents. "Automatically?" → Hooks. "External data?" → MCP.
+- **Include architecture context:** Add project description, tech stack, key directories/file paths, design patterns, and proprietary conventions Claude can't infer.
+- **Prefer pointers over copies:** Reference authoritative context (`path:line`) instead of duplicating snippets, so guidance stays current.
+
+</TipSlide>

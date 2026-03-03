@@ -1,0 +1,11 @@
+<TipSlide
+  title={"Hooks: Deterministic Safety Guardrails"}
+  description={"Use hooks for event-driven automation that fires reliably — protect test files and block destructive commands."}
+  tags={["Config", "Advanced", "Gotcha"]}
+>
+
+- **Deterministic automation:** Hooks are shell commands at lifecycle points (session start, pre/post-tool use, session stop). Exit code `0` = success; exit code `2` = blocking error. Unlike skills, they don't rely on the LLM deciding to act.
+- **Protect test files:** Set up a `pre-tool-use` hook that blocks modifications to test directories. Claude agents tend to modify tests to make them pass rather than fixing implementation.
+- **Block destructive commands:** Use a `pre-tool-use` hook matching the `bash` tool to intercept dangerous commands (e.g., `rm -rf`). Return exit code 2 to block.
+
+</TipSlide>

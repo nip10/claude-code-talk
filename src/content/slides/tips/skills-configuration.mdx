@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Skills: Configuration and Scope"}
+  description={"Keep skills lean, control invocation modes, use advanced front matter options, and choose between project and global scope."}
+  tags={["Config", "Advanced"]}
+>
+
+- **Keep `skill.md` under 500 lines:** Move detailed reference material to separate files (e.g., `./references/api-reference.md`) to reduce token costs per invocation.
+- **Control invocation mode:** Configure whether a skill triggers via natural language, slash command, or both. Use the "disable model invocation" flag to prevent false-positive activations.
+- **Advanced front matter:** Beyond name and description, configure `allowed-tools`, specific `model`, `context` hints, `hooks`, and designated `agent`.
+- **Project vs. global:** Skills in `.claude/skills/` are project-scoped. Skills in `~/.claude/skills/` are available globally across all projects.
+
+</TipSlide>

@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Sub-Agent Patterns and Configuration"}
+  description={"Return file paths instead of content, restrict tool access, route to cheaper models, and use orchestrator delegation."}
+  tags={["Performance", "Advanced", "Config"]}
+>
+
+- **Return file paths, not content:** Configure sub-agents to save output to files and return only file paths. Full content in returns causes rapid context growth.
+- **Restrict tool access:** Limit which tools sub-agents can use (e.g., read-only tools for a code reviewer) via the `tools` field in the agent definition.
+- **Route to cheaper models:** Set the `model` field per sub-agent. Route simple tasks to Haiku, research to Sonnet, complex reasoning to Opus.
+- **Orchestrators delegate:** Master orchestrator scripts should spin up fresh sub-agents per step rather than executing everything inline. Define explicit roles and enforce handoffs with compact artifacts.
+
+</TipSlide>

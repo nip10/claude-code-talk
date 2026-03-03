@@ -1,0 +1,11 @@
+<TipSlide
+  title={"Browser Automation"}
+  description={"Use Agent Browser for token-efficient web interaction, /chrome for browser navigation, and drag-and-drop screenshots for visual context."}
+  tags={["Advanced", "Front-End"]}
+>
+
+- **Agent Browser:** A CLI tool (Vercel Labs) using the accessibility tree instead of full DOM screenshots — compressing pages from ~15,000 tokens to ~200-400 tokens (~93% reduction). Workflow: open URL, snapshot, interact using refs, re-snapshot to verify.
+- **`/chrome` command:** Opens a browser panel Claude can control — navigating, clicking, typing, reading page contents. Useful for web services without an API or validating live UI.
+- **Drag-and-drop screenshots:** Take a screenshot (Cmd+Shift+4 on macOS) and drag it directly into the Claude Code input. Visual context for UI bugs or design mocks is often faster than describing them.
+
+</TipSlide>

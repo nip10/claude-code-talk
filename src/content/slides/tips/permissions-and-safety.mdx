@@ -1,0 +1,10 @@
+<TipSlide
+  title={"Permissions and Safety Configuration"}
+  description={"Use --dangerously-skip-permissions only in throwaway environments and configure granular control via /permissions and settings.json."}
+  tags={["Config", "Advanced", "Gotcha"]}
+>
+
+- **`--dangerously-skip-permissions`:** Bypasses all permission prompts for fully autonomous runs. One user bricked a Linux machine with this mode. Use only in throwaway VMs, containers, or sandboxes — never on production.
+- **Granular control:** Use `/permissions` and `.claude/settings.json` to configure which commands are auto-allowed, require confirmation, or are completely denied. Commit `settings.json` to share safety rules with the team.
+
+</TipSlide>

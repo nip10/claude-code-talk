@@ -1,0 +1,13 @@
+<TipSlide
+  title={"Verification and Testing"}
+  description={"Build tasks around validation loops, use domain-appropriate verification, adopt TDD, and watch for test manipulation."}
+  tags={["Workflow", "Gotcha"]}
+>
+
+- **Validation loops:** Give Claude an explicit way to run output and receive feedback. Define done criteria up front (tests, build, screenshot, logs) and require Claude to state and run verification steps.
+- **Domain-appropriate methods:** Match verification to the domain: bash for scripts, browser extension for web UIs, simulator MCPs for mobile apps.
+- **TDD reduces token usage:** Write tests first, then implement. TDD provides structured, low-token verification without expensive browser or simulator calls.
+- **Watch for test manipulation:** Claude may silently weaken tests to make them pass. Review the tests themselves — confirm assertions haven't been weakened. Use hooks to protect test files.
+- **Linters as a final pass:** Run linters and formatters on Claude-generated code. Include them in a stop hook or instruct Claude to run them after generating code.
+
+</TipSlide>

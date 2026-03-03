@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Skills: What They Are and How They Work"}
+  description={"Skills are reusable markdown SOPs with lazy context loading and flexible invocation via slash commands or natural language."}
+  tags={["Config", "Workflow"]}
+>
+
+- **Markdown-based SOPs:** A skill is a `skill.md` file at `.claude/skills/<name>/skill.md` with YAML front matter (name, description) and step-by-step instructions.
+- **YAML front matter matters:** Claude reads only the front matter (~100 tokens) during initial search. A clear, specific description is critical for correct skill selection.
+- **Progressive context loading:** (1) YAML front matter to identify matches, (2) full `skill.md` once matched (~1k-2k tokens), (3) supporting reference files only if needed.
+- **Flexible invocation:** Invoke via slash command (e.g., `/excalidraw-diagram`) for precision, or let Claude auto-activate via natural language matching the description.
+
+</TipSlide>

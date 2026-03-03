@@ -1,0 +1,11 @@
+<TipSlide
+  title={"MCP: Management and Best Practices"}
+  description={"Be selective with MCPs to avoid context bloat, let Claude install them, and use /mcp to inspect and manage."}
+  tags={["Config", "Performance", "Gotcha"]}
+>
+
+- **Be selective:** MCPs consume large amounts of context tokens. Only install MCPs that are strictly necessary. Use `/context` to monitor MCP token usage.
+- **Let Claude install MCPs:** Ask: "Find and install a good [tool] MCP." Claude will locate, recommend, and wire it up. Verify the recommended MCP is current and well-maintained.
+- **Use `/mcp` to manage:** Run `/mcp` to see installed MCPs. Use `/mcp add [service]` to install new ones. Easier than manual JSON editing.
+
+</TipSlide>

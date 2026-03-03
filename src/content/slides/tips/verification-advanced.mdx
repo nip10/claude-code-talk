@@ -1,0 +1,10 @@
+<TipSlide
+  title={"Advanced Verification Patterns"}
+  description={"Use adversarial agents for fact-checking and prompt Claude to predict future failures after implementation."}
+  tags={["Workflow", "Prompt Technique", "Advanced"]}
+>
+
+- **Adversarial agents:** Set up two agents: one produces a draft, a second critically fact-checks it. A single agent reviewing its own work is ineffective — an adversarial agent catches errors the first misses.
+- **Proactive risk analysis:** After implementation, prompt: "Review this implementation and identify all areas where the app could fail in production that our tests might not catch." One team found 18 production-critical issues this way.
+
+</TipSlide>

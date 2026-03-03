@@ -1,0 +1,11 @@
+<TipSlide
+  title={"Sub-Agents: When and How to Use Them"}
+  description={"Use sub-agents for isolated tasks with dedicated context windows, but avoid them when full session context is needed."}
+  tags={["Workflow", "Advanced", "Performance"]}
+>
+
+- **Isolated context:** Sub-agents have their own context windows, isolated from the parent session. Only their summary output returns. Built-in types: `explore` (read-only), `plan` (research), `general-purpose` (all tools).
+- **Avoid when context is needed:** Don't route tasks needing awareness of the current session's full codebase through sub-agents. Keep testing, debugging, and code review in the same session.
+- **Dedicated purpose agents:** Create specialized sub-agents for documentation lookup, codebase exploration, etc., with dedicated tools (e.g., web search, Context7 MCP).
+
+</TipSlide>

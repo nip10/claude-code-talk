@@ -1,0 +1,11 @@
+<TipSlide
+  title={"Hooks: Automated Quality Checks"}
+  description={"Auto-format files on write, run verification on stop, and let Claude generate hook configurations for you."}
+  tags={["Config", "Workflow"]}
+>
+
+- **Auto-format on write:** Use a `post-tool-use` hook matching `write` and `edit` tools to automatically run a formatter (e.g., `prettier --write [file]`). Ensures consistent formatting without relying on Claude.
+- **Stop hook for verification:** Configure a `stop` hook that runs tests/linters whenever Claude finishes. Ensures verification never gets skipped, even when you're not watching.
+- **Let Claude write your hooks:** Describe the desired behavior in plain English: "Add a post-tool-use hook that runs the linter after every file edit." Claude generates the JSON config, saving time and reducing syntax errors.
+
+</TipSlide>

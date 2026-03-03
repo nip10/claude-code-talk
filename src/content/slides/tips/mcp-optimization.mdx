@@ -1,0 +1,11 @@
+<TipSlide
+  title={"MCP: Optimization and Documentation"}
+  description={"Use Context7 for library docs, enable MCP CLI mode to reduce overhead, and pre-scrape documentation locally."}
+  tags={["Config", "Performance", "Advanced"]}
+>
+
+- **Context7 MCP:** Provides AI agents with up-to-date documentation for third-party libraries. Closes the gap between training data and current dependency versions.
+- **MCP CLI mode:** Set the experimental `MCP_CLI` flag to `true` to remove MCP tool schemas from context and route calls through bash commands on demand. Eliminates token overhead in projects with many MCPs.
+- **Pre-scrape documentation:** Scrape external docs once, save locally as `references/docs-reference.md`, and prefer batched/single-call retrieval over repeated broad web searches.
+
+</TipSlide>

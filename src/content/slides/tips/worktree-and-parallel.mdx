@@ -1,0 +1,10 @@
+<TipSlide
+  title={"Worktrees and Parallel Development"}
+  description={"Use worktree isolation for parallel feature streams and run multiple Claude instances simultaneously."}
+  tags={["Workflow", "Advanced"]}
+>
+
+- **Worktree isolation:** Use `claude -W <name>` for isolated branches/worktrees, and configure sub-agents with `isolation: worktree`. Prevents branch collisions and keeps parallel agent work clean. Find local worktree folders under `.claude/worktrees/<name>`.
+- **Multiple instances:** Open multiple terminal windows/panes running separate Claude Code instances on different tasks. Boris Cherny runs 5 local + 5-10 on claude.ai/code. Use iTerm2 panes (Cmd+D to split) and enable sound notifications when Claude finishes.
+
+</TipSlide>

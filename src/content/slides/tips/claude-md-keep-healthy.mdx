@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Keep CLAUDE.md Lean and Living"}
+  description={"Target ~300 lines / 2.5k tokens, use progressive disclosure, delegate formatting to tools, and evolve rules through Claude."}
+  tags={["Config", "Performance", "Workflow"]}
+>
+
+- **Stay concise:** Target ~300 lines / 2.5k tokens. Every line is loaded into the context window at session start — bloat increases costs and dilutes instruction-following.
+- **Progressive disclosure:** Place specialized guidance in separate docs (build, test, conventions). Add a short index with one-line descriptions and instruct Claude to read only what's relevant.
+- **Not a linter:** Put formatting and linting enforcement in deterministic tools (hooks, CI). Keep CLAUDE.md focused on architecture, constraints, and execution rules.
+- **Living rulebook:** When Claude makes a recurring mistake, say "Update the rules file so we never do this again." Review changes like code and keep only high-signal rules.
+
+</TipSlide>
