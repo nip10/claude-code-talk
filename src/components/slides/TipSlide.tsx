@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import SlideWrapper from "@/components/SlideWrapper";
 import Tag from "@/components/Tag";
+import { formatInlineCode } from "@/lib/format-inline-code";
 
 interface TipSlideProps {
   title: string;
@@ -14,9 +15,9 @@ export default function TipSlide({ title, description, tags, children }: TipSlid
     <SlideWrapper>
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-3">
-          <h3 className="text-4xl font-bold leading-tight">{title}</h3>
+          <h3 className="text-4xl font-bold leading-tight">{formatInlineCode(title)}</h3>
           {description && (
-            <p className="text-xl leading-relaxed text-claude-muted">{description}</p>
+            <p className="text-xl leading-relaxed text-claude-muted">{formatInlineCode(description)}</p>
           )}
         </div>
         {tags && tags.length > 0 && (

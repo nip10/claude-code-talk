@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import SlideWrapper from "@/components/SlideWrapper";
 import Tag from "@/components/Tag";
+import { formatInlineCode } from "@/lib/format-inline-code";
 
 interface RichTipSlideProps {
   title: string;
@@ -37,9 +38,9 @@ export default function RichTipSlide({
         </div>
 
         <div className="flex flex-col gap-3">
-          <h3 className="text-4xl leading-tight text-claude-text-light">{title}</h3>
+          <h3 className="text-4xl leading-tight text-claude-text-light">{formatInlineCode(title)}</h3>
           {description && (
-            <p className="max-w-4xl text-lg leading-relaxed text-claude-muted">{description}</p>
+            <p className="max-w-4xl text-lg leading-relaxed text-claude-muted">{formatInlineCode(description)}</p>
           )}
         </div>
 
