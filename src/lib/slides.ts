@@ -26,6 +26,7 @@ import Slide23PluginsAndSkillsThatImproveOutputQuality from "@/content/slides/23
 import Slide24WhatTeamsAreActuallyUsing from "@/content/slides/24-what-teams-are-actually-using.mdx";
 import Slide25WhatYouAreProbablyMissing from "@/content/slides/25-what-you-are-probably-missing.mdx";
 import Slide26StartNextWeekFrontendRolloutPlan from "@/content/slides/26-start-next-week-frontend-rollout-plan.mdx";
+import Slide27RecommendedAnthropicSkillExamples from "@/content/slides/27-recommended-anthropic-skill-examples.mdx";
 import GeneratedTip001 from "@/content/slides/tips/tip-001.mdx";
 import GeneratedTip002 from "@/content/slides/tips/tip-002.mdx";
 import GeneratedTip003 from "@/content/slides/tips/tip-003.mdx";
@@ -1113,6 +1114,15 @@ const RAW_SLIDES: SlideData[] = [
     tags: ["Adoption", "Front-end", "Team Enablement"],
     sources: [],
     Component: Slide26StartNextWeekFrontendRolloutPlan,
+  },
+  {
+    slug: "recommended-anthropic-skill-examples",
+    title: "Recommended Anthropic Skill Examples",
+    description: "High-value examples to borrow for front-end teams.",
+    groupTitle: "Advanced",
+    tags: ["Skills", "Front-end", "Examples"],
+    sources: [],
+    Component: Slide27RecommendedAnthropicSkillExamples,
   },
   {
     slug: "closing",
