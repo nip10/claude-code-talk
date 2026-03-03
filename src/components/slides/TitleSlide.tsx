@@ -11,7 +11,6 @@ export default function TitleSlide({ title, subtitle, presenter, date }: TitleSl
   return (
     <SlideWrapper>
       <div className="flex flex-col items-center gap-8 text-center">
-        <div className="h-1 w-24 rounded-full bg-claude-terracotta" />
         <h1 className="text-6xl font-bold leading-tight tracking-tight">{title}</h1>
         {subtitle && (
           <p className="max-w-2xl text-2xl text-claude-muted">{subtitle}</p>
@@ -20,7 +19,6 @@ export default function TitleSlide({ title, subtitle, presenter, date }: TitleSl
           {presenter && <p className="text-lg text-claude-text-light">{presenter}</p>}
           {date && <p className="text-sm text-claude-muted">{date}</p>}
         </div>
-        <div className="h-1 w-24 rounded-full bg-claude-terracotta" />
       </div>
     </SlideWrapper>
   );

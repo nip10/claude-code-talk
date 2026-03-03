@@ -14,7 +14,6 @@ export default function ClosingSlide({
   return (
     <SlideWrapper>
       <div className="flex flex-col items-center gap-8 text-center">
-        <div className="h-1 w-24 rounded-full bg-claude-terracotta" />
         <h2 className="text-5xl font-bold leading-tight">{title}</h2>
         {takeaways && takeaways.length > 0 && (
           <ul className="flex flex-col gap-3 text-left text-xl text-claude-muted">
@@ -29,7 +28,6 @@ export default function ClosingSlide({
         {contact && (
           <p className="mt-4 text-lg text-claude-muted">{contact}</p>
         )}
-        <div className="h-1 w-24 rounded-full bg-claude-terracotta" />
       </div>
     </SlideWrapper>
   );
