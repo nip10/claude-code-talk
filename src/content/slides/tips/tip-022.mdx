@@ -1,0 +1,11 @@
+<TipSlide
+  title={"Sub-Agents: When to Use and When to Avoid"}
+  description={"Sub-agents run in isolated context windows — great for atomic tasks, bad for anything needing full session awareness."}
+  tags={["Workflow", "Advanced", "Performance"]}
+>
+
+_Source section: Sub-Agents_
+- **Use for isolated work:** Sub-agents have their own context windows. Only their summary returns. Create definitions in `.claude/agents/` with description, allowed tools, and task scope. Built-in agents: `explore`, `plan`, `general-purpose`.
+- **Avoid for session-dependent tasks:** Sub-agents don't receive the parent's full reasoning trace. Keep testing, debugging, and code review in the main session — a testing agent that doesn't know what code was just written produces worse results.
+
+</TipSlide>

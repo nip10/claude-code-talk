@@ -1,0 +1,13 @@
+<TipSlide
+  title={"Be Selective with MCPs — They Cause Context Bloat"}
+  description={"MCPs consume large amounts of context tokens. Only install MCPs that are strictly necessary."}
+  tags={["Performance", "Config", "Gotcha"]}
+>
+
+_Source section: MCP Servers_
+- **What:** MCPs consume large amounts of context tokens. Only install MCPs that are strictly necessary.
+- **Why it matters:** Every MCP response adds to the context window. Over long sessions, this compounds and degrades quality while inflating cost.
+- **How:** Use `/context` to monitor MCP token usage. Disable directory-specific MCPs when not in use.
+- **Update:** Anthropic now supports [progressive disclosure via Tool Search](https://www.anthropic.com/engineering/advanced-tool-use) — MCP tools can be deferred and loaded on-demand instead of polluting the context upfront. This reduced token usage from ~72K to ~500 tokens for 50+ MCP tools. Look for `ToolSearch` in your session to see it in action.
+
+</TipSlide>

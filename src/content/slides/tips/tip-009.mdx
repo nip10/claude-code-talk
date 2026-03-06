@@ -1,0 +1,28 @@
+<TipSlide
+  title={"Skills: Build, Structure, and Iterate"}
+  description={"Skills are markdown SOPs at `.claude/skills/<name>/skill.md`. Write clear front matter, keep them lean, and refine over 10–30 runs."}
+  tags={["Config", "Workflow", "Performance"]}
+>
+
+_Source section: Skills_
+- **What:** A skill is a markdown SOP at `.claude/skills/<skill-name>/skill.md` with YAML front matter (`name`, `description`) and step-by-step instructions. Invoked via slash command or natural language.
+- **Front matter matters:** Claude reads only the front matter (~100 tokens) during initial search. Write a 1–2 sentence description capturing exactly what the skill does. Use `disable model invocation` to restrict to slash-command-only.
+- **Keep lean — 3-level loading:** (1) Front matter to identify matches, (2) full `skill.md` once matched (~1–2k tokens), (3) reference files only if needed. Keep `skill.md` under 500 lines.
+- **Build iteratively:** Do the task manually with Claude first, then say: _"Turn this into a skill."_ Refine over 10–30 runs until output is reliable. Run → observe → give feedback → let Claude update → repeat.
+
+```markdown
+# SKILL.md
+
+## Name
+Write release notes
+
+## Trigger
+When user asks for release notes from commits
+
+## Workflow
+1. Read recent commits
+2. Group by feature/fix/chore
+3. Produce concise summary + risks
+```
+
+</TipSlide>

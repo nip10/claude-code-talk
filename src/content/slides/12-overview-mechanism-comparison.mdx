@@ -1,0 +1,38 @@
+<MechanismComparisonSlide
+  title="CLAUDE.md vs Commands vs Skills vs Hooks"
+  subtitle="Use this matrix to choose the right mechanism quickly"
+  rows={[
+    {
+      name: "CLAUDE.md",
+      scope: "Project/session defaults",
+      trigger: "Loaded at task start",
+      bestFor: "Standing guidance and constraints",
+      avoidWhen: "One-off task automation",
+      exampleArtifact: "CLAUDE.md",
+    },
+    {
+      name: "Commands",
+      scope: "Prompt-level reusable action",
+      trigger: "Manual /command invocation",
+      bestFor: "Repeatable operator workflows",
+      avoidWhen: "Always-on policy enforcement",
+      exampleArtifact: ".claude/commands/*.md",
+    },
+    {
+      name: "Skills",
+      scope: "Capability + process guidance",
+      trigger: "Invoked when relevant",
+      bestFor: "Multi-step specialized tasks",
+      avoidWhen: "Tiny static reminders",
+      exampleArtifact: ".claude/skills/*/SKILL.md",
+    },
+    {
+      name: "Hooks",
+      scope: "Automatic guardrails",
+      trigger: "Lifecycle/tool events",
+      bestFor: "Validation and policy gates",
+      avoidWhen: "Human-facing explainer content",
+      exampleArtifact: ".claude/settings.json",
+    },
+  ]}
+/>

@@ -1,0 +1,12 @@
+<TipSlide
+  title={"Protect Test Files from Agent Modification"}
+  description={"Set up a `pre-tool-use` hook that blocks modifications to test directories."}
+  tags={["Config", "Gotcha", "Advanced"]}
+>
+
+_Source section: Hooks_
+- **What:** Set up `pre-tool-use` hooks that block unwanted modifications — e.g., test file writes or destructive shell commands.
+- **Why it matters:** Claude agents tend to modify tests to make them pass rather than fixing implementation. Destructive commands like `rm -rf` can cause accidental data loss. These hooks prevent both.
+- **How:** Write a script that inspects the target file path or command string. If it matches a test directory or a dangerous pattern, `echo` an error message and `exit 2` to block the action.
+
+</TipSlide>

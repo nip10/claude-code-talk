@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-claude-terracotta: #D97757;
+  --color-claude-terracotta-dark: #C46849;
+  --color-claude-bg-dark: #1A1816;
+  --color-claude-bg-darker: #141311;
+  --color-claude-bg-light: #F5F0EB;
+  --color-claude-text-light: #F5F0EB;
+  --color-claude-text-dark: #1B1B1F;
+  --color-claude-muted: #B0A39A;
+  --color-claude-border-dark: #342F2B;
+  --color-claude-paper: #F2EBE3;
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-sora);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background:
+    radial-gradient(1200px 700px at 12% -20%, rgb(217 119 87 / 18%), transparent 60%),
+    radial-gradient(1000px 650px at 90% 110%, rgb(217 119 87 / 14%), transparent 55%),
+    var(--color-claude-bg-dark);
+  color: var(--color-claude-text-light);
+  font-family: var(--font-manrope), "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sora), "Sora", "Avenir Next", "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-slide {
+  color: var(--color-claude-text-light);
+}
+
+.markdown-slide > * + * {
+  margin-top: 0.75rem;
+}
+
+.markdown-slide p,
+.markdown-slide li {
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-claude-text-light) 92%, white 8%);
+}
+
+.markdown-slide ul,
+.markdown-slide ol {
+  margin-left: 1rem;
+  padding-left: 0.75rem;
+}
+
+.markdown-slide li + li {
+  margin-top: 0.35rem;
+}
+
+.markdown-slide pre {
+  background: var(--color-claude-bg-darker);
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+
+.markdown-slide table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.markdown-slide th,
+.markdown-slide td {
+  border-bottom: 1px solid color-mix(in oklab, var(--color-claude-border-dark) 70%, black 30%);
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-slide th {
+  color: var(--color-claude-text-light);
+  font-weight: 600;
+}
+
+.markdown-slide td {
+  color: var(--color-claude-muted);
+}
+
+/* Code blocks (rehype-pretty-code) */
+[data-rehype-pretty-code-figure] pre {
+  background: var(--color-claude-bg-darker) !important;
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+[data-rehype-pretty-code-figure] code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 0.25rem;
+}
+
+/* Inline code */
+:not(pre) > code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  background: var(--color-claude-bg-darker);
+  border: 1px solid var(--color-claude-border-dark);
+  border-radius: 0.375rem;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.9em;
+}
+
+/* === Tip Section Cards === */
+
+/* Source section label — restyle as subtle uppercase tag */
+.tip-sections > p:has(> em:only-child) {
+  margin-bottom: -0.25rem;
+}
+
+.tip-sections > p > em:only-child {
+  font-style: normal;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-claude-muted);
+  opacity: 0.45;
+}
+
+/* General spacing */
+.tip-sections > * + * {
+  margin-top: 0.75rem;
+}
+
+/* Paragraph text */
+.tip-sections p {
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-claude-text-light) 90%, white 10%);
+}
+
+/* Lists → card containers */
+.tip-sections > ul,
+.tip-sections > ol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Individual cards */
+.tip-sections > ul > li,
+.tip-sections > ol > li {
+  position: relative;
+  border-radius: 0.625rem;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--color-claude-border-dark) 70%, transparent);
+  border-left: 3px solid;
+  line-height: 1.55;
+  font-size: 0.95rem;
+  color: color-mix(in oklab, var(--color-claude-text-light) 85%, white 15%);
+}
+
+/* Card accent: terracotta (1st, 4th, 7th…) */
+.tip-sections > ul > li:nth-child(3n+1),
+.tip-sections > ol > li:nth-child(3n+1) {
+  border-left-color: var(--color-claude-terracotta);
+  background: rgba(217, 119, 87, 0.045);
+}
+
+/* Card accent: dusty blue (2nd, 5th, 8th…) */
+.tip-sections > ul > li:nth-child(3n+2),
+.tip-sections > ol > li:nth-child(3n+2) {
+  border-left-color: #7B9EC4;
+  background: rgba(123, 158, 196, 0.045);
+}
+
+/* Card accent: sage green (3rd, 6th, 9th…) */
+.tip-sections > ul > li:nth-child(3n),
+.tip-sections > ol > li:nth-child(3n) {
+  border-left-color: #7BAE8E;
+  background: rgba(123, 174, 142, 0.045);
+}
+
+/* Section labels (bold text at start of items) */
+.tip-sections li > strong:first-child {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+/* Colored dot before label */
+.tip-sections li > strong:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Label + dot colors: terracotta */
+.tip-sections > ul > li:nth-child(3n+1) > strong:first-child,
+.tip-sections > ol > li:nth-child(3n+1) > strong:first-child {
+  color: var(--color-claude-terracotta);
+}
+
+.tip-sections > ul > li:nth-child(3n+1) > strong:first-child::before,
+.tip-sections > ol > li:nth-child(3n+1) > strong:first-child::before {
+  background: var(--color-claude-terracotta);
+}
+
+/* Label + dot colors: dusty blue */
+.tip-sections > ul > li:nth-child(3n+2) > strong:first-child,
+.tip-sections > ol > li:nth-child(3n+2) > strong:first-child {
+  color: #7B9EC4;
+}
+
+.tip-sections > ul > li:nth-child(3n+2) > strong:first-child::before,
+.tip-sections > ol > li:nth-child(3n+2) > strong:first-child::before {
+  background: #7B9EC4;
+}
+
+/* Label + dot colors: sage green */
+.tip-sections > ul > li:nth-child(3n) > strong:first-child,
+.tip-sections > ol > li:nth-child(3n) > strong:first-child {
+  color: #7BAE8E;
+}
+
+.tip-sections > ul > li:nth-child(3n) > strong:first-child::before,
+.tip-sections > ol > li:nth-child(3n) > strong:first-child::before {
+  background: #7BAE8E;
+}
+
+/* Ordered list: numbered step indicators */
+.tip-sections > ol {
+  counter-reset: tip-step;
+}
+
+.tip-sections > ol > li {
+  counter-increment: tip-step;
+  padding-left: 3.5rem;
+}
+
+.tip-sections > ol > li::before {
+  content: counter(tip-step);
+  position: absolute;
+  left: 0.875rem;
+  top: 0.875rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.tip-sections > ol > li:nth-child(3n+1)::before {
+  background: var(--color-claude-terracotta);
+  color: var(--color-claude-bg-dark);
+}
+
+.tip-sections > ol > li:nth-child(3n+2)::before {
+  background: #7B9EC4;
+  color: var(--color-claude-bg-dark);
+}
+
+.tip-sections > ol > li:nth-child(3n)::before {
+  background: #7BAE8E;
+  color: var(--color-claude-bg-dark);
+}
+
+/* Print styles */
+@media print {
+  html,
+  body {
+    overflow: visible;
+  }
+
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  .slide-wrapper {
+    break-after: page;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .slide-counter,
+  .no-print {
+    display: none !important;
+  }
+}
